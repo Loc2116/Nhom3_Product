@@ -8,8 +8,8 @@
 
 Để xem và đánh giá nhanh toàn bộ dự án, vui lòng theo thứ tự ưu tiên sau:
 
-1. **Xem Báo cáo Nghiên cứu Khoa học Chuẩn Bộ GD&ĐT (Word Report):**
-   * Mở file **[`BaoCao.docx`](file:///BaoCao.docx)** (hoặc trong `docs/BaoCao.docx`) với đầy đủ cấu trúc học thuật: Trang bìa, Lời cam đoan, Mục lục, Danh mục chữ viết tắt, Tóm tắt nghiên cứu, 4 Chương nội dung định lượng, Kết luận và Tài liệu tham khảo.
+1. **Xem Báo cáo Nghiên cứu Khoa học Toàn diện (Word Report):**
+   * Mở file **[`docs/CBAM_Report_EN.docx`](file:///docs/CBAM_Report_EN.docx)** với đầy đủ cấu trúc học thuật quốc tế: Executive Summary, Methodology, 4 Chương phân tích định lượng, Scenario Simulation và Policy Recommendations.
 2. **Xem Bảng Điều khiển Tương tác (Interactive Dashboard):**
    * Mở trực tiếp file **[`dashboard/index.html`](file:///dashboard/index.html)** bằng bất kỳ trình duyệt web nào (Chrome, Edge, Firefox, Safari).
    * Không cần cài đặt web server hay môi trường phức tạp (tất cả biểu đồ Chart.js và dữ liệu đã được nhúng sẵn độc lập).
@@ -31,7 +31,6 @@
 ```text
 Hackathong_2/
 ├── README.md                                             # ⭐️ Tài liệu tổng quan & hướng dẫn xem bài (file này)
-├── BaoCao.docx                                           # 📑 Báo cáo Nghiên cứu Khoa học chuẩn Bộ GD&ĐT (Word hoàn chỉnh)
 ├── 01_cbam_preprocessing_pipeline.ipynb                  # Notebook tiền xử lý dữ liệu từ Eurostat, EEX, EU Commission
 ├── 02_cbam_live_verification_and_methodology_audit.ipynb # Notebook kiểm toán phương pháp & đối chứng trực tiếp
 ├── CBAM_Dataset_Data_Dictionary_Presentation.xlsx         # Bảng tra cứu thuộc tính & dữ liệu thuyết trình 5 tabs
@@ -53,7 +52,7 @@ Hackathong_2/
 │   └── raw/                                              # Dữ liệu gốc đối chiếu (EU Default Values, Benchmarks...)
 │
 ├── docs/                                                 # Tài liệu phân tích & báo cáo kỹ thuật
-│   ├── BaoCao.docx                                       # Bản lưu báo cáo nghiên cứu khoa học chuẩn Bộ GD&ĐT
+│   ├── CBAM_Report_EN.docx                               # 📑 Comprehensive Academic & Policy Report (Word format)
 │   ├── CBAM_CARBON_POLICY_OUTLINE.md                     # Khung chính sách & chiến lược bảo vệ doanh nghiệp VN
 │   ├── DATA_CATALOG_AND_QUALITY_REPORT.md                # Danh mục dữ liệu, link tải trực tiếp & báo cáo chất lượng
 │   ├── CBAM_Dataset_Data_Dictionary_Presentation.xlsx    # Bản lưu từ điển thuộc tính thuyết trình
