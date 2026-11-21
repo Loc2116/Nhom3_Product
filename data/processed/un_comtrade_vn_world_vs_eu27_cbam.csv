@@ -1,0 +1,41 @@
+﻿series,period,reporter_code,partner_code,flow_code,cmd_code,sector_group,net_wgt_kg,net_wgt_tonnes,primary_value_usd
+VN_to_World_Export,2021,704,0,X,2523,Cement,41778191689.151,41778191.689151004,1646447667.899
+VN_to_World_Export,2021,704,0,X,31,Fertilisers,0.0,0.0,549157083.484
+VN_to_World_Export,2021,704,0,X,72,Iron and Steel (Ch.72),0.0,0.0,11935412188.576
+VN_to_World_Export,2021,704,0,X,73,Iron and Steel Articles (Ch.73),0.0,0.0,3952844215.914
+VN_to_World_Export,2021,704,0,X,76,Aluminium,0.0,0.0,2039212367.146
+VN_to_World_Export,2022,704,0,X,2523,Cement,29620211134.0,29620211.134,1281105227.083
+VN_to_World_Export,2022,704,0,X,31,Fertilisers,0.0,0.0,1078260967.131
+VN_to_World_Export,2022,704,0,X,72,Iron and Steel (Ch.72),0.0,0.0,8192873644.922
+VN_to_World_Export,2022,704,0,X,73,Iron and Steel Articles (Ch.73),,,4637931268.397
+VN_to_World_Export,2022,704,0,X,76,Aluminium,0.0,0.0,2510002340.645
+VN_to_World_Export,2023,704,0,X,2523,Cement,,,1216896357.535
+VN_to_World_Export,2023,704,0,X,31,Fertilisers,0.0,0.0,616862991.077
+VN_to_World_Export,2023,704,0,X,72,Iron and Steel (Ch.72),,,8511999071.407
+VN_to_World_Export,2023,704,0,X,73,Iron and Steel Articles (Ch.73),,,3955258357.08
+VN_to_World_Export,2023,704,0,X,76,Aluminium,0.0,0.0,2146228558.147
+EU27_from_VN_Import,2021,97,704,M,2523,Cement,127909579.0,127909.579,14432612.748
+EU27_from_VN_Import,2021,97,704,M,31,Fertilisers,0.0,0.0,2309233.127
+EU27_from_VN_Import,2021,97,704,M,72,Iron and Steel (Ch.72),0.0,0.0,1833842230.184
+EU27_from_VN_Import,2021,97,704,M,73,Iron and Steel Articles (Ch.73),0.0,0.0,819413624.938
+EU27_from_VN_Import,2021,97,704,M,76,Aluminium,0.0,0.0,131065566.821
+EU27_from_VN_Import,2022,97,704,M,2523,Cement,210408142.0,210408.142,20934714.175
+EU27_from_VN_Import,2022,97,704,M,31,Fertilisers,0.0,0.0,24435594.354
+EU27_from_VN_Import,2022,97,704,M,72,Iron and Steel (Ch.72),0.0,0.0,2148675316.365
+EU27_from_VN_Import,2022,97,704,M,73,Iron and Steel Articles (Ch.73),0.0,0.0,1174303367.708
+EU27_from_VN_Import,2022,97,704,M,76,Aluminium,0.0,0.0,301688396.942
+EU27_from_VN_Import,2023,97,704,M,2523,Cement,159384035.0,159384.035,15428337.565
+EU27_from_VN_Import,2023,97,704,M,31,Fertilisers,0.0,0.0,9041579.495
+EU27_from_VN_Import,2023,97,704,M,72,Iron and Steel (Ch.72),0.0,0.0,2219102894.573
+EU27_from_VN_Import,2023,97,704,M,73,Iron and Steel Articles (Ch.73),0.0,0.0,759741447.718
+EU27_from_VN_Import,2023,97,704,M,76,Aluminium,0.0,0.0,170190969.559
+EU27_from_VN_Import,2024,97,704,M,2523,Cement,92207094.0,92207.094,9844972.588
+EU27_from_VN_Import,2024,97,704,M,31,Fertilisers,0.0,0.0,1457321.028
+EU27_from_VN_Import,2024,97,704,M,72,Iron and Steel (Ch.72),0.0,0.0,2370707847.76
+EU27_from_VN_Import,2024,97,704,M,73,Iron and Steel Articles (Ch.73),0.0,0.0,773020557.891
+EU27_from_VN_Import,2024,97,704,M,76,Aluminium,0.0,0.0,120427854.143
+EU27_from_VN_Import,2025,97,704,M,2523,Cement,113610525.0,113610.525,12564571.809
+EU27_from_VN_Import,2025,97,704,M,31,Fertilisers,0.0,0.0,1544310.668
+EU27_from_VN_Import,2025,97,704,M,72,Iron and Steel (Ch.72),0.0,0.0,1936837457.871
+EU27_from_VN_Import,2025,97,704,M,73,Iron and Steel Articles (Ch.73),0.0,0.0,952557667.553
+EU27_from_VN_Import,2025,97,704,M,76,Aluminium,0.0,0.0,114221426.176
