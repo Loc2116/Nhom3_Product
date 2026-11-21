@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Viet Nam Carbon Pricing & EU CBAM Exposure: Fiscal & Sector Impact (2026–2034)</title>
+<title>Chi phí CBAM EU 2026–2034 — Phân tích tác động với xuất khẩu Việt Nam</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #f4f7fb;
+    --bg: #f6f8fb;
     --surface: #ffffff;
-    --ink: #0f2544;
-    --slate: #4a607a;
-    --muted: #627d98;
-    --border: #d0dce8;
+    --surface-alt: #f1f5f9;
+    --mist: #e6edf5;
+    --steel: #3b648a;
+    --blue: #1e3a5f;
     --navy: #0f2544;
-    --navy-light: #1e3a5f;
-    --steel: #2c5282;
-    --ice: #e2edf8;
-    --mist: #f0f5fa;
+    --border: #dbe3ee;
+    --ink: #10243e;
+    --muted: #4a607a;
+    --slate: #6b7f96;
     --red: #8c1d35;
-    --amber: #b5946d;
-    --blue: #1f5080;
+    --amber: #d4ba99;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg);
@@ -34,22 +34,10 @@
 
   /* Hero (Executive Deep Navy Gradient — Slide-Ready) */
   .hero {
-    background: linear-gradient(135deg, #091729 0%, #0f2544 55%, #19365c 100%);
+    background: linear-gradient(135deg, #0b1c34 0%, #163154 58%, #22446d 100%);
     color: #ffffff;
-    padding: 34px 0 46px;
-    border-bottom: 3px solid var(--steel);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    top: -40%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(44, 82, 130, 0.28) 0%, rgba(15, 37, 68, 0) 70%);
-    pointer-events: none;
+    padding: 36px 0 50px;
+    border-bottom: none;
   }
   .hero-tag {
     display: inline-block;
@@ -57,11 +45,11 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #7dd3fc;
-    background: rgba(125, 211, 252, 0.12);
-    border: 1px solid rgba(125, 211, 252, 0.3);
-    padding: 3px 9px;
-    border-radius: 4px;
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    padding: 4px 12px;
+    border-radius: 999px;
     margin-bottom: 12px;
   }
   .hero h1 { font-size: 27px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.25; }
@@ -99,41 +87,40 @@
   .c-amber { color: #8c6f4b; }
 
   /* Sections & Cards */
-  .section { margin-bottom: 34px; }
-  .section-head { margin-bottom: 14px; }
-  .section-head h2 {
-    font-size: 19px;
-    font-weight: 800;
-    color: var(--navy);
-    letter-spacing: -0.01em;
+  .section { margin-bottom: 34px; scroll-margin-top: 66px; }
+  .section-head {
+    border-left: 4px solid var(--blue);
+    padding-left: 14px;
+    margin-bottom: 16px;
   }
+  .section-head h2 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+  .section-head p { font-size: 13.5px; color: var(--muted); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .stack-cards { display: flex; flex-direction: column; gap: 18px; }
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 20px 22px;
-    box-shadow: 0 4px 18px rgba(15, 37, 68, 0.04);
+    box-shadow: 0 4px 18px rgba(15, 37, 68, 0.05);
   }
   .card-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 14px;
+    gap: 10px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
   }
-  .card-top h3 { font-size: 15px; font-weight: 700; color: var(--navy); }
+  .card h3 { font-size: 15.5px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
   .card-sub { font-size: 12.5px; color: var(--slate); }
+  .chart-wrap { position: relative; height: 330px; width: 100%; }
+  .chart-wrap-wide { position: relative; height: 330px; width: 100%; }
+  .chart-wrap-tall { position: relative; height: 340px; width: 100%; }
+  .chart-wrap-pareto { position: relative; height: 410px; width: 100%; }
 
-  .chart-wrap-wide { position: relative; height: 350px; }
-  .chart-wrap-pareto { position: relative; height: 375px; }
-  .chart-wrap-tall { position: relative; height: 420px; }
-  .chart-wrap { position: relative; height: 330px; }
-
-  .stack-cards { display: flex; flex-direction: column; gap: 20px; }
-  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-  /* Pill controls */
+  /* Pill Toggles */
   .btn-group {
     display: inline-flex;
     background: var(--mist);
@@ -182,8 +169,8 @@
 
 <header class="hero">
   <div class="container">
-    <div class="hero-tag">Updated Nov 2026</div>
-    <h1>CBAM Exposure 2026–2034: Where and Why Viet Nam Is Impacted</h1>
+    <div class="hero-tag">Cập nhật 11/2026</div>
+    <h1>Chi phí CBAM 2026–2034: Việt Nam chịu tác động ở đâu và vì sao?</h1>
   </div>
 </header>
 
@@ -191,28 +178,28 @@
   <!-- KPI Cards -->
   <section class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-label">CBAM-Covered Export Turnover (Annualized 9M 2026)</div>
-      <div class="kpi-value">$2.26B</div>
-      <div class="kpi-sub">2.64M tonnes &bull; Top 20 codes account for 88.6% of CBAM</div>
+      <div class="kpi-label">Kim ngạch xuất khẩu chịu CBAM (9M 2026 quy năm)</div>
+      <div class="kpi-value">$2,26 tỷ</div>
+      <div class="kpi-sub">2,64 triệu tấn &bull; Top 20 mã chiếm 88,6% CBAM</div>
     </div>
     <div class="kpi-card k-coral">
-      <div class="kpi-label">Projected CBAM Liability (2026)</div>
-      <div class="kpi-value c-red">$319.9M</div>
-      <div class="kpi-sub">Default markup penalty: $58.0M &rarr; $174.2M (2029)</div>
+      <div class="kpi-label">Chi phí CBAM (9M 2026)</div>
+      <div class="kpi-value c-red">$319,9 triệu</div>
+      <div class="kpi-sub">Phụ phí mặc định: $58,0 → $174,2 triệu (2029)</div>
     </div>
   </section>
 
   <!-- SECTION 1 -->
   <section id="sec1" class="section">
     <div class="section-head">
-      <h2>1. Projected CBAM Costs Surge Over 2026–2034 as Free Allocation Phases Out</h2>
+      <h2>1. Chi phí CBAM tăng mạnh trong giai đoạn 2026–2034</h2>
     </div>
 
     <div class="card">
       <div class="card-top">
         <div>
           <h3></h3>
-          <div class="card-sub">Annualized 9-month 2026 export volume (258 active CN8 codes), average 2026 EUA price ($91.68/t)</div>
+          <div class="card-sub">Giả định các năm sau giữ nguyên sản lượng 9T/2026 quy năm (258 mã CN8) và giá EUA bình quân 2026 ($91,68/tấn).</div>
         </div>
       </div>
       <div class="chart-wrap-wide"><canvas id="chartTrajectory"></canvas></div>
@@ -222,14 +209,14 @@
   <!-- SECTION 2 -->
   <section id="sec2" class="section">
     <div class="section-head">
-      <h2>2. Top 20 CN8 Codes Account for 88.6% of CBAM Liability; Cement &amp; Steel Billets Bear Highest Exposure</h2>
+      <h2>2. 20 mã hàng chiếm 88,6% chi phí CBAM</h2>
     </div>
 
     <div class="stack-cards">
       <div class="card">
         <div class="card-top">
           <div>
-            <h3 id="paretoTitle">Top 20 CN8 Codes by CBAM Liability &amp; Pareto Curve (2026)</h3>
+            <h3 id="paretoTitle">Top 20 mã CN8 có chi phí CBAM cao nhất và đường Pareto (2026)</h3>
           </div>
         </div>
         <div class="chart-wrap-pareto"><canvas id="chartPareto"></canvas></div>
@@ -238,8 +225,8 @@
       <div class="card">
         <div class="card-top">
           <div>
-            <h3>Effective CBAM Rate vs. Export Turnover by HS4 Sector Group</h3>
-            <div class="card-sub">Bubble area proportional to CBAM liability (synchronized 2026–2034 scale)</div>
+            <h3>Tỷ lệ chi phí CBAM trên kim ngạch xuất khẩu theo nhóm hàng HS4</h3>
+            <div class="card-sub">Diện tích bóng tỷ lệ thuận chi phí CBAM (cùng thang đo 2026–2034)</div>
           </div>
           <div class="btn-group" id="grpQuadYear">
             <button class="btn-pill" data-yr="26">2026</button>
@@ -255,14 +242,14 @@
   <!-- SECTION 3 -->
   <section id="sec3" class="section">
     <div class="section-head">
-      <h2>3. EU Carbon Price &amp; EUR/USD FX Drive a +30.8% Cost Surge (2024–2026)</h2>
+      <h2>3. Giá carbon EU và tỷ giá EUR/USD làm chi phí tăng 30,8% (2024–2026)</h2>
     </div>
 
     <div class="grid-2">
       <div class="card">
         <div class="card-top">
           <div>
-            <h3>Monthly EUA Auction Price vs. EUR/USD Exchange Rate (01/2021–11/2026)</h3>
+            <h3>Diễn biến giá EUA và tỷ giá EUR/USD theo tháng (01/2021–11/2026)</h3>
           </div>
         </div>
         <div class="chart-wrap"><canvas id="chartEuaFxDual"></canvas></div>
@@ -271,7 +258,7 @@
       <div class="card">
         <div class="card-top">
           <div>
-            <h3>Quarterly Cost Drivers: EUA vs. EUR/USD (Q1/2021–Q3/2026)</h3>
+            <h3>Đóng góp của giá EUA và tỷ giá vào biến động chi phí theo quý (Q1/2021–Q3/2026)</h3>
           </div>
         </div>
         <div class="chart-wrap"><canvas id="chartFxDecomp"></canvas></div>
@@ -282,15 +269,15 @@
 
 <footer class="footer">
   <div class="container">
-    Sources: Eurostat Comext (2019–09/2026) &bull; European Commission (Regulations 2023/956, 2025/2620, 2025/2621, 2026/1740, 2026/2498) &bull; EEX (2020–11/2026) &bull; ECB &bull; UN Comtrade &bull; HNX (Decree 29/2026).
+    Nguồn: Eurostat Comext (2019–09/2026) &bull; Ủy ban châu Âu (Quy định 2023/956, 2025/2620, 2025/2621, 2026/1740, 2026/2498) &bull; EEX (2020–11/2026) &bull; ECB &bull; UN Comtrade &bull; HNX (NĐ 29/2026).
   </div>
 </footer>
 
 <script>
-const DATA = {"tot_val_26_b":2.26,"eua_2026_usd":91.68,"eua_2026_eur":79.5,"vn_pilot_usd":5.22,"eex_stats":{"mean_eur_2024":64.77,"mean_usd_2024":70.08,"mean_eur_2026":79.5,"mean_usd_2026":91.68,"growth_usd_pct":30.8,"eua_add_m":55.7,"fx_add_m":19.7,"total_add_m":75.4,"fx_min_val":0.9826,"fx_min_ym":"2022-10"},"eex_series":[{"ym":"2021-01","eur":33.51,"fx":1.2171,"usd":40.78},{"ym":"2021-02","eur":37.66,"fx":1.2098,"usd":45.56},{"ym":"2021-03","eur":40.5,"fx":1.1899,"usd":48.19},{"ym":"2021-04","eur":44.96,"fx":1.1979,"usd":53.85},{"ym":"2021-05","eur":51.96,"fx":1.2146,"usd":63.11},{"ym":"2021-06","eur":52.7,"fx":1.2047,"usd":63.49},{"ym":"2021-07","eur":53.42,"fx":1.1822,"usd":63.15},{"ym":"2021-08","eur":56.29,"fx":1.1772,"usd":66.26},{"ym":"2021-09","eur":61.33,"fx":1.177,"usd":72.19},{"ym":"2021-10","eur":59.62,"fx":1.1601,"usd":69.17},{"ym":"2021-11","eur":65.54,"fx":1.1414,"usd":74.81},{"ym":"2021-12","eur":80.64,"fx":1.1304,"usd":91.15},{"ym":"2022-01","eur":83.3,"fx":1.1314,"usd":94.25},{"ym":"2022-02","eur":89.99,"fx":1.1342,"usd":102.06},{"ym":"2022-03","eur":74.61,"fx":1.1019,"usd":82.21},{"ym":"2022-04","eur":80.53,"fx":1.0819,"usd":87.12},{"ym":"2022-05","eur":85.29,"fx":1.0578,"usd":90.22},{"ym":"2022-06","eur":82.72,"fx":1.0566,"usd":87.4},{"ym":"2022-07","eur":81.58,"fx":1.0179,"usd":83.04},{"ym":"2022-08","eur":87.66,"fx":1.0128,"usd":88.79},{"ym":"2022-09","eur":69.57,"fx":0.9904,"usd":68.9},{"ym":"2022-10","eur":69.52,"fx":0.9826,"usd":68.31},{"ym":"2022-11","eur":75.55,"fx":1.0201,"usd":77.07},{"ym":"2022-12","eur":86.47,"fx":1.0589,"usd":91.57},{"ym":"2023-01","eur":80.07,"fx":1.0769,"usd":86.22},{"ym":"2023-02","eur":91.98,"fx":1.0715,"usd":98.56},{"ym":"2023-03","eur":89.46,"fx":1.0706,"usd":95.78},{"ym":"2023-04","eur":89.6,"fx":1.0968,"usd":98.27},{"ym":"2023-05","eur":83.83,"fx":1.0868,"usd":91.1},{"ym":"2023-06","eur":85.03,"fx":1.084,"usd":92.17},{"ym":"2023-07","eur":86.3,"fx":1.1058,"usd":95.43},{"ym":"2023-08","eur":84.78,"fx":1.0909,"usd":92.49},{"ym":"2023-09","eur":81.99,"fx":1.0684,"usd":87.6},{"ym":"2023-10","eur":80.71,"fx":1.0563,"usd":85.25},{"ym":"2023-11","eur":75.69,"fx":1.0808,"usd":81.81},{"ym":"2023-12","eur":68.74,"fx":1.0903,"usd":74.95},{"ym":"2024-01","eur":61.66,"fx":1.0905,"usd":67.24},{"ym":"2024-02","eur":55.35,"fx":1.0795,"usd":59.75},{"ym":"2024-03","eur":57.46,"fx":1.0872,"usd":62.47},{"ym":"2024-04","eur":63.83,"fx":1.0728,"usd":68.47},{"ym":"2024-05","eur":70.94,"fx":1.0812,"usd":76.71},{"ym":"2024-06","eur":68.6,"fx":1.0759,"usd":73.81},{"ym":"2024-07","eur":66.82,"fx":1.0844,"usd":72.46},{"ym":"2024-08","eur":70.07,"fx":1.1012,"usd":77.16},{"ym":"2024-09","eur":65.16,"fx":1.1106,"usd":72.37},{"ym":"2024-10","eur":63.1,"fx":1.0904,"usd":68.81},{"ym":"2024-11","eur":67.02,"fx":1.063,"usd":71.24},{"ym":"2024-12","eur":67.22,"fx":1.0479,"usd":70.44},{"ym":"2025-01","eur":75.9,"fx":1.0354,"usd":78.59},{"ym":"2025-02","eur":75.72,"fx":1.0413,"usd":78.84},{"ym":"2025-03","eur":68.76,"fx":1.0807,"usd":74.31},{"ym":"2025-04","eur":64.21,"fx":1.1214,"usd":72.01},{"ym":"2025-05","eur":70.52,"fx":1.1278,"usd":79.53},{"ym":"2025-06","eur":72.12,"fx":1.1516,"usd":83.06},{"ym":"2025-07","eur":69.99,"fx":1.1677,"usd":81.73},{"ym":"2025-08","eur":70.96,"fx":1.1631,"usd":82.54},{"ym":"2025-09","eur":75.46,"fx":1.1732,"usd":88.53},{"ym":"2025-10","eur":77.92,"fx":1.163,"usd":90.63},{"ym":"2025-11","eur":80.7,"fx":1.156,"usd":93.29},{"ym":"2025-12","eur":82.74,"fx":1.1709,"usd":96.88},{"ym":"2026-01","eur":86.51,"fx":1.1738,"usd":101.54},{"ym":"2026-02","eur":73.77,"fx":1.1824,"usd":87.23},{"ym":"2026-03","eur":68.17,"fx":1.1558,"usd":78.79},{"ym":"2026-04","eur":72.81,"fx":1.1706,"usd":85.24},{"ym":"2026-05","eur":74.95,"fx":1.1673,"usd":87.49},{"ym":"2026-06","eur":77.82,"fx":1.1518,"usd":89.63},{"ym":"2026-07","eur":80.26,"fx":1.1417,"usd":91.64},{"ym":"2026-08","eur":81.63,"fx":1.1593,"usd":94.63},{"ym":"2026-09","eur":84.62,"fx":1.1513,"usd":97.42},{"ym":"2026-10","eur":85.97,"fx":1.1202,"usd":96.3},{"ym":"2026-11","eur":87.95,"fx":1.1202,"usd":98.52}],"pareto_milestones":{"total_codes":258,"top5_cbam26":59.6,"top10_cbam26":74.5,"top20_val":74.7,"top20_cbam26":88.6,"top20_cbam29":89.4},"pareto_top20":[{"cn8":"72071210","name":"Steel slabs (semi-finished)","hs4":"7207","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":83.39,"cbam29_m":132.74,"val26_m":396.96,"cum_val_pct":17.6,"cum26_pct":26.1,"cum29_pct":26.5},{"cn8":"72104900","name":"Galvanized steel sheet","hs4":"7210","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":46.54,"cbam29_m":77.7,"val26_m":336.51,"cum_val_pct":32.5,"cum26_pct":40.6,"cum29_pct":42.0},{"cn8":"72083900","name":"HRC (<3mm thickness)","hs4":"7208","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":35.31,"cbam29_m":56.34,"val26_m":192.29,"cum_val_pct":41.0,"cum26_pct":51.7,"cum29_pct":53.2},{"cn8":"25232900","name":"Portland cement*","hs4":"2523","sector":"Cement","chain":"ets_pilot","fallback":true,"cbam26_m":12.75,"cbam29_m":18.49,"val26_m":17.38,"cum_val_pct":41.7,"cum26_pct":55.6,"cum29_pct":56.9},{"cn8":"72106100","name":"Al-Zn coated sheet (Galvalume)","hs4":"7210","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":12.61,"cbam29_m":21.06,"val26_m":92.06,"cum_val_pct":45.8,"cum26_pct":59.6,"cum29_pct":61.1},{"cn8":"72107080","name":"Pre-painted steel sheet","hs4":"7210","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":11.02,"cbam29_m":18.4,"val26_m":93.75,"cum_val_pct":50.0,"cum26_pct":63.0,"cum29_pct":64.8},{"cn8":"72142000","name":"Deformed steel rebar","hs4":"7214","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":10.81,"cbam29_m":17.21,"val26_m":60.96,"cum_val_pct":52.7,"cum26_pct":66.4,"cum29_pct":68.2},{"cn8":"72083800","name":"HRC (3–4.75mm)","hs4":"7208","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":10.37,"cbam29_m":16.54,"val26_m":56.34,"cum_val_pct":55.2,"cum26_pct":69.6,"cum29_pct":71.5},{"cn8":"73181588","name":"Steel screws & bolts","hs4":"7318","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":8.0,"cbam29_m":11.89,"val26_m":75.95,"cum_val_pct":58.5,"cum26_pct":72.1,"cum29_pct":73.9},{"cn8":"72249014","name":"Alloy steel billets","hs4":"7224","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":7.59,"cbam29_m":10.78,"val26_m":21.43,"cum_val_pct":59.5,"cum26_pct":74.5,"cum29_pct":76.0},{"cn8":"72193310","name":"Stainless steel CRC (1–3mm)*","hs4":"7219","sector":"Iron & Steel","chain":"ets_pilot","fallback":true,"cbam26_m":6.83,"cbam29_m":8.81,"val26_m":40.86,"cum_val_pct":61.3,"cum26_pct":76.7,"cum29_pct":77.8},{"cn8":"72193410","name":"Stainless steel CRC (0.5–1mm)*","hs4":"7219","sector":"Iron & Steel","chain":"ets_pilot","fallback":true,"cbam26_m":6.79,"cbam29_m":8.77,"val26_m":43.89,"cum_val_pct":63.2,"cum26_pct":78.8,"cum29_pct":79.5},{"cn8":"72091690","name":"CRC (1–3mm)","hs4":"7209","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":5.21,"cbam29_m":8.57,"val26_m":33.63,"cum_val_pct":64.7,"cum26_pct":80.4,"cum29_pct":81.2},{"cn8":"72139110","name":"Steel wire rod","hs4":"7213","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":5.12,"cbam29_m":8.14,"val26_m":25.87,"cum_val_pct":65.8,"cum26_pct":82.0,"cum29_pct":82.9},{"cn8":"72091790","name":"CRC (0.5–1mm)","hs4":"7209","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":4.6,"cbam29_m":7.58,"val26_m":30.05,"cum_val_pct":67.2,"cum26_pct":83.4,"cum29_pct":84.4},{"cn8":"73181290","name":"Steel wood screws","hs4":"7318","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":4.58,"cbam29_m":7.29,"val26_m":92.86,"cum_val_pct":71.3,"cum26_pct":84.9,"cum29_pct":85.8},{"cn8":"73181568","name":"Hex socket screws","hs4":"7318","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":3.22,"cbam29_m":4.78,"val26_m":34.64,"cum_val_pct":72.8,"cum26_pct":85.9,"cum29_pct":86.8},{"cn8":"72251990","name":"Cold-rolled electrical steel","hs4":"7225","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":2.99,"cbam29_m":4.23,"val26_m":11.2,"cum_val_pct":73.3,"cum26_pct":86.8,"cum29_pct":87.6},{"cn8":"72071912","name":"Steel billets (<0.25% C)","hs4":"7207","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":2.94,"cbam29_m":4.69,"val26_m":16.48,"cum_val_pct":74.0,"cum26_pct":87.7,"cum29_pct":88.6},{"cn8":"72139149","name":"Other steel wire rod","hs4":"7213","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"cbam26_m":2.67,"cbam29_m":4.25,"val26_m":14.97,"cum_val_pct":74.7,"cum26_pct":88.6,"cum29_pct":89.4}],"quadrant_hs4":[{"hs4":"7210","label":"7210 Flat-rolled coated/plated steel","short":"7210 Coated","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":537.35,"unit_usd":792.0,"cbam26_m":71.76,"cbam29_m":119.8,"cbam34_m":191.7,"eff26":13.4,"eff29":22.3,"eff34":35.7},{"hs4":"7207","label":"7207 Semi-finished steel (billets/slabs)","short":"7207 Billets","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":418.22,"unit_usd":551.0,"cbam26_m":87.41,"cbam29_m":139.15,"cbam34_m":212.77,"eff26":20.9,"eff29":33.3,"eff34":50.9},{"hs4":"7318","label":"7318 Screws, bolts & fasteners","short":"7318","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":331.97,"unit_usd":2073.0,"cbam26_m":22.61,"cbam29_m":34.25,"cbam34_m":49.71,"eff26":6.8,"eff29":10.3,"eff34":15.0},{"hs4":"7208","label":"7208 Hot-rolled flat steel (HRC)","short":"7208 HRC","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":271.49,"unit_usd":627.0,"cbam26_m":49.61,"cbam29_m":79.16,"cbam34_m":121.33,"eff26":18.3,"eff29":29.2,"eff34":44.7},{"hs4":"7219","label":"7219 Flat-rolled stainless steel","short":"7219","sector":"Iron & Steel","chain":"ets_pilot","fallback":true,"val_m":115.26,"unit_usd":2436.0,"cbam26_m":18.67,"cbam29_m":24.11,"cbam34_m":28.31,"eff26":16.2,"eff29":20.9,"eff34":24.6},{"hs4":"7209","label":"7209 Cold-rolled flat steel (CRC)","short":"7209","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":67.05,"unit_usd":707.0,"cbam26_m":10.31,"cbam29_m":16.96,"cbam34_m":26.79,"eff26":15.4,"eff29":25.3,"eff34":39.9},{"hs4":"7308","label":"7308 Steel structures & parts","short":"7308","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":65.63,"unit_usd":4130.0,"cbam26_m":2.43,"cbam29_m":3.69,"cbam34_m":5.38,"eff26":3.7,"eff29":5.6,"eff34":8.2},{"hs4":"7214","label":"7214 Steel bars & rods (rebar)","short":"7214","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":60.96,"unit_usd":649.0,"cbam26_m":10.81,"cbam29_m":17.21,"cbam34_m":26.32,"eff26":17.7,"eff29":28.2,"eff34":43.2},{"hs4":"7326","label":"7326 Other articles of iron/steel","short":"7326","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":49.79,"unit_usd":4781.0,"cbam26_m":1.1,"cbam29_m":1.83,"cbam34_m":2.93,"eff26":2.2,"eff29":3.7,"eff34":5.9},{"hs4":"7604","label":"7604 Aluminium bars, rods & profiles","short":"7604 Aluminium","sector":"Aluminium","chain":"other","fallback":false,"val_m":48.23,"unit_usd":5394.0,"cbam26_m":1.72,"cbam29_m":2.08,"cbam34_m":2.17,"eff26":3.6,"eff29":4.3,"eff34":4.5},{"hs4":"7306","label":"7306 Other tubes & hollow profiles","short":"7306","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":45.67,"unit_usd":2485.0,"cbam26_m":3.49,"cbam29_m":4.93,"cbam34_m":6.58,"eff26":7.7,"eff29":10.8,"eff34":14.4},{"hs4":"7616","label":"7616 Other articles of aluminium","short":"7616 Aluminium","sector":"Aluminium","chain":"other","fallback":false,"val_m":44.06,"unit_usd":8293.0,"cbam26_m":1.25,"cbam29_m":1.5,"cbam34_m":1.56,"eff26":2.8,"eff29":3.4,"eff34":3.5},{"hs4":"7213","label":"7213 Wire rod (hot-rolled)","short":"7213","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":40.84,"unit_usd":604.0,"cbam26_m":7.78,"cbam29_m":12.39,"cbam34_m":18.95,"eff26":19.1,"eff29":30.3,"eff34":46.4},{"hs4":"7307","label":"7307 Tube or pipe fittings","short":"7307","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":25.6,"unit_usd":3187.0,"cbam26_m":0.95,"cbam29_m":1.5,"cbam34_m":2.27,"eff26":3.7,"eff29":5.8,"eff34":8.9},{"hs4":"7224","label":"7224 Other alloy steel in ingots/billets","short":"7224 Billets","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":21.43,"unit_usd":614.0,"cbam26_m":7.59,"cbam29_m":10.78,"cbam34_m":14.48,"eff26":35.4,"eff29":50.3,"eff34":67.6},{"hs4":"2523","label":"2523 Portland cement & clinker","short":"2523 Cement","sector":"Cement","chain":"ets_pilot","fallback":true,"val_m":17.38,"unit_usd":117.0,"cbam26_m":12.75,"cbam29_m":18.49,"cbam34_m":25.53,"eff26":73.3,"eff29":106.4,"eff34":146.8},{"hs4":"7229","label":"7229 Wire of other alloy steel","short":"7229","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":16.84,"unit_usd":1351.0,"cbam26_m":2.7,"cbam29_m":3.84,"cbam34_m":5.2,"eff26":16.0,"eff29":22.8,"eff34":30.9},{"hs4":"7304","label":"7304 Seamless tubes & pipes","short":"7304","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":16.27,"unit_usd":4731.0,"cbam26_m":0.71,"cbam29_m":0.97,"cbam34_m":1.26,"eff26":4.3,"eff29":6.0,"eff34":7.7},{"hs4":"7605","label":"7605 Aluminium wire","short":"7605","sector":"Aluminium","chain":"other","fallback":false,"val_m":14.11,"unit_usd":4663.0,"cbam26_m":0.58,"cbam29_m":0.7,"cbam34_m":0.73,"eff26":4.1,"eff29":4.9,"eff34":5.2},{"hs4":"7225","label":"7225 Flat-rolled alloy steel","short":"7225","sector":"Iron & Steel","chain":"ets_pilot","fallback":false,"val_m":11.61,"unit_usd":823.0,"cbam26_m":3.1,"cbam29_m":4.39,"cbam34_m":5.89,"eff26":26.7,"eff29":37.8,"eff34":50.7}],"quad_max_cbam34":212.77,"fx_decomp":{"certs26_m":3.4894,"certs29_m":5.469,"yearly":[{"year":2021,"eur_mean":53.18,"fx_mean":1.1835,"usd_mean":62.64,"eur_yoy_pct":117.2,"fx_yoy_pct":3.7,"usd_yoy_pct":123.3,"bill26_m":218.6,"bill29_m":342.6},{"year":2022,"eur_mean":80.56,"fx_mean":1.0539,"usd_mean":85.08,"eur_yoy_pct":51.5,"fx_yoy_pct":-11.0,"usd_yoy_pct":35.8,"bill26_m":296.9,"bill29_m":465.3},{"year":2023,"eur_mean":83.18,"fx_mean":1.0816,"usd_mean":89.97,"eur_yoy_pct":3.2,"fx_yoy_pct":2.6,"usd_yoy_pct":5.7,"bill26_m":313.9,"bill29_m":492.0},{"year":2024,"eur_mean":64.77,"fx_mean":1.0821,"usd_mean":70.08,"eur_yoy_pct":-22.1,"fx_yoy_pct":0.0,"usd_yoy_pct":-22.1,"bill26_m":244.5,"bill29_m":383.2},{"year":2025,"eur_mean":73.75,"fx_mean":1.1293,"usd_mean":83.33,"eur_yoy_pct":13.9,"fx_yoy_pct":4.4,"usd_yoy_pct":18.9,"bill26_m":290.8,"bill29_m":455.7},{"year":2026,"eur_mean":79.5,"fx_mean":1.154,"usd_mean":91.68,"eur_yoy_pct":7.8,"fx_yoy_pct":2.2,"usd_yoy_pct":10.0,"bill26_m":319.9,"bill29_m":501.4}],"quarterly":[{"q_key":"2021-Q1","q_num":"Q1","year":2021,"q_full":"Q1/2021","eur_mean":37.22,"fx_mean":1.2056,"usd_mean":44.85,"eur_qoq_pct":37.4,"fx_qoq_pct":1.1,"usd_qoq_pct":38.7},{"q_key":"2021-Q2","q_num":"Q2","year":2021,"q_full":"Q2/2021","eur_mean":49.87,"fx_mean":1.2057,"usd_mean":60.15,"eur_qoq_pct":34.0,"fx_qoq_pct":0.0,"usd_qoq_pct":34.1},{"q_key":"2021-Q3","q_num":"Q3","year":2021,"q_full":"Q3/2021","eur_mean":57.01,"fx_mean":1.1788,"usd_mean":67.2,"eur_qoq_pct":14.3,"fx_qoq_pct":-2.2,"usd_qoq_pct":11.7},{"q_key":"2021-Q4","q_num":"Q4","year":2021,"q_full":"Q4/2021","eur_mean":68.6,"fx_mean":1.144,"usd_mean":78.38,"eur_qoq_pct":20.3,"fx_qoq_pct":-3.0,"usd_qoq_pct":16.6},{"q_key":"2022-Q1","q_num":"Q1","year":2022,"q_full":"Q1/2022","eur_mean":82.63,"fx_mean":1.1225,"usd_mean":92.84,"eur_qoq_pct":20.5,"fx_qoq_pct":-1.9,"usd_qoq_pct":18.5},{"q_key":"2022-Q2","q_num":"Q2","year":2022,"q_full":"Q2/2022","eur_mean":82.84,"fx_mean":1.0654,"usd_mean":88.25,"eur_qoq_pct":0.3,"fx_qoq_pct":-5.1,"usd_qoq_pct":-4.9},{"q_key":"2022-Q3","q_num":"Q3","year":2022,"q_full":"Q3/2022","eur_mean":79.6,"fx_mean":1.007,"usd_mean":80.24,"eur_qoq_pct":-3.9,"fx_qoq_pct":-5.5,"usd_qoq_pct":-9.1},{"q_key":"2022-Q4","q_num":"Q4","year":2022,"q_full":"Q4/2022","eur_mean":77.18,"fx_mean":1.0205,"usd_mean":78.98,"eur_qoq_pct":-3.0,"fx_qoq_pct":1.3,"usd_qoq_pct":-1.6},{"q_key":"2023-Q1","q_num":"Q1","year":2023,"q_full":"Q1/2023","eur_mean":87.17,"fx_mean":1.073,"usd_mean":93.52,"eur_qoq_pct":12.9,"fx_qoq_pct":5.1,"usd_qoq_pct":18.4},{"q_key":"2023-Q2","q_num":"Q2","year":2023,"q_full":"Q2/2023","eur_mean":86.15,"fx_mean":1.0892,"usd_mean":93.85,"eur_qoq_pct":-1.2,"fx_qoq_pct":1.5,"usd_qoq_pct":0.3},{"q_key":"2023-Q3","q_num":"Q3","year":2023,"q_full":"Q3/2023","eur_mean":84.36,"fx_mean":1.0884,"usd_mean":91.84,"eur_qoq_pct":-2.1,"fx_qoq_pct":-0.1,"usd_qoq_pct":-2.1},{"q_key":"2023-Q4","q_num":"Q4","year":2023,"q_full":"Q4/2023","eur_mean":75.05,"fx_mean":1.0758,"usd_mean":80.67,"eur_qoq_pct":-11.0,"fx_qoq_pct":-1.2,"usd_qoq_pct":-12.2},{"q_key":"2024-Q1","q_num":"Q1","year":2024,"q_full":"Q1/2024","eur_mean":58.16,"fx_mean":1.0857,"usd_mean":63.15,"eur_qoq_pct":-22.5,"fx_qoq_pct":0.9,"usd_qoq_pct":-21.7},{"q_key":"2024-Q2","q_num":"Q2","year":2024,"q_full":"Q2/2024","eur_mean":67.79,"fx_mean":1.0766,"usd_mean":73.0,"eur_qoq_pct":16.6,"fx_qoq_pct":-0.8,"usd_qoq_pct":15.6},{"q_key":"2024-Q3","q_num":"Q3","year":2024,"q_full":"Q3/2024","eur_mean":67.35,"fx_mean":1.0987,"usd_mean":73.99,"eur_qoq_pct":-0.7,"fx_qoq_pct":2.1,"usd_qoq_pct":1.4},{"q_key":"2024-Q4","q_num":"Q4","year":2024,"q_full":"Q4/2024","eur_mean":65.78,"fx_mean":1.0671,"usd_mean":70.16,"eur_qoq_pct":-2.3,"fx_qoq_pct":-2.9,"usd_qoq_pct":-5.2},{"q_key":"2025-Q1","q_num":"Q1","year":2025,"q_full":"Q1/2025","eur_mean":73.46,"fx_mean":1.0524,"usd_mean":77.25,"eur_qoq_pct":11.7,"fx_qoq_pct":-1.4,"usd_qoq_pct":10.1},{"q_key":"2025-Q2","q_num":"Q2","year":2025,"q_full":"Q2/2025","eur_mean":68.95,"fx_mean":1.1336,"usd_mean":78.2,"eur_qoq_pct":-6.1,"fx_qoq_pct":7.7,"usd_qoq_pct":1.2},{"q_key":"2025-Q3","q_num":"Q3","year":2025,"q_full":"Q3/2025","eur_mean":72.14,"fx_mean":1.168,"usd_mean":84.27,"eur_qoq_pct":4.6,"fx_qoq_pct":3.0,"usd_qoq_pct":7.8},{"q_key":"2025-Q4","q_num":"Q4","year":2025,"q_full":"Q4/2025","eur_mean":80.46,"fx_mean":1.1633,"usd_mean":93.6,"eur_qoq_pct":11.5,"fx_qoq_pct":-0.4,"usd_qoq_pct":11.1},{"q_key":"2026-Q1","q_num":"Q1","year":2026,"q_full":"Q1/2026","eur_mean":76.15,"fx_mean":1.1707,"usd_mean":89.19,"eur_qoq_pct":-5.4,"fx_qoq_pct":0.6,"usd_qoq_pct":-4.7},{"q_key":"2026-Q2","q_num":"Q2","year":2026,"q_full":"Q2/2026","eur_mean":75.19,"fx_mean":1.1633,"usd_mean":87.45,"eur_qoq_pct":-1.3,"fx_qoq_pct":-0.6,"usd_qoq_pct":-1.9},{"q_key":"2026-Q3","q_num":"Q3","year":2026,"q_full":"Q3/2026","eur_mean":82.17,"fx_mean":1.1508,"usd_mean":94.56,"eur_qoq_pct":9.3,"fx_qoq_pct":-1.1,"usd_qoq_pct":8.1}],"bridge_24_26":{"eur24":64.77,"eur26":79.5,"fx24":1.0821,"fx26":1.154,"usd24":70.08,"usd26":91.68,"usd_pct":30.8,"eur_pct":22.7,"fx_pct":6.7,"b26_start":244.5,"b26_eur_only":300.2,"b26_end":319.9,"b26_eua_add":55.7,"b26_fx_add":19.7,"b26_tot_add":75.4,"eua_share_pct":73.9,"fx_share_pct":26.1,"b29_start":383.2,"b29_end":501.4,"b29_eua_add":87.2,"b29_fx_add":30.9,"b29_tot_add":118.2,"corr_24_26":0.49,"fx_min_val":0.9826,"fx_min_ym":"2022-10"}},"cn8_sim":[{"s":"Cement","q":0.013,"dv":1.39,"bm":0.666},{"s":"Cement","q":0.004,"dv":1.45,"bm":0.859},{"s":"Cement","q":148751.155,"dv":1.44,"bm":0.666},{"s":"Cement","q":0.144,"dv":1.43,"bm":0.666},{"s":"Fertilisers","q":266.667,"dv":1.31,"bm":0.503},{"s":"Fertilisers","q":201.6,"dv":2.38,"bm":0.882},{"s":"Fertilisers","q":140.0,"dv":1.27,"bm":0.434},{"s":"Fertilisers","q":0.04,"dv":0.88,"bm":0.319},{"s":"Fertilisers","q":160.004,"dv":0.88,"bm":0.339},{"s":"Fertilisers","q":325.333,"dv":0.85,"bm":0.248},{"s":"Iron and Steel","q":1584.003,"dv":1.69,"bm":1.319},{"s":"Iron and Steel","q":746.667,"dv":5.59,"bm":1.319},{"s":"Iron and Steel","q":112.035,"dv":2.87,"bm":1.124},{"s":"Iron and Steel","q":0.013,"dv":2.33,"bm":1.288},{"s":"Iron and Steel","q":0.0,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":724715.121,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":25581.061,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":9380.156,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":0.001,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":240.573,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":304.28,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":3362.547,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":8528.499,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":21914.753,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":90507.807,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":308294.16,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":5.652,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":0.099,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":32.28,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":47916.393,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":42350.433,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":4087.893,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":466.24,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":5.888,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":873.015,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":440176.977,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":5651.432,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":119289.159,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":8437.005,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":104242.544,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":7.827,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":1734.927,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":60.708,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.005,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":68.053,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":87.637,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":44452.339,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":23198.017,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":93956.941,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":1.628,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":36.091,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":0.1,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":239.207,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":31.359,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":32.256,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":80.767,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":15.5,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":3937.216,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":5.769,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":0.739,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":0.005,"dv":5.006,"bm":1.4},{"s":"Iron and Steel","q":0.013,"dv":5.006,"bm":1.4},{"s":"Iron and Steel","q":0.009,"dv":4.94,"bm":1.17},{"s":"Iron and Steel","q":6692.555,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":103.044,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":17299.875,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":1031.439,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":17208.167,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":1873.099,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":3012.276,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":89.596,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":4.32,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":7.228,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":0.048,"dv":4.94,"bm":1.17},{"s":"Iron and Steel","q":672.916,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":0.795,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":209.761,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":11.195,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":0.064,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":173.259,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":0.016,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":38.793,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":0.071,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":3.748,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":0.06,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":249.909,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":35.253,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":62.497,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":34909.355,"dv":3.48,"bm":1.493},{"s":"Iron and Steel","q":13578.567,"dv":3.5,"bm":1.488},{"s":"Iron and Steel","q":483.387,"dv":3.5,"bm":1.586},{"s":"Iron and Steel","q":10.285,"dv":3.5,"bm":1.619},{"s":"Iron and Steel","q":37.383,"dv":3.5,"bm":1.619},{"s":"Iron and Steel","q":4.783,"dv":3.5,"bm":1.586},{"s":"Iron and Steel","q":0.033,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":8.207,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.001,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.177,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.029,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.016,"dv":3.44,"bm":1.7235},{"s":"Iron and Steel","q":0.0,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":3.764,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.119,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.015,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.003,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":7512.811,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":4949.743,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.033,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":0.036,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":0.377,"dv":2.77,"bm":1.383},{"s":"Iron and Steel","q":27.7,"dv":2.77,"bm":1.383},{"s":"Iron and Steel","q":48.977,"dv":2.77,"bm":1.383},{"s":"Iron and Steel","q":1.999,"dv":2.23,"bm":1.484},{"s":"Iron and Steel","q":0.001,"dv":2.23,"bm":1.484},{"s":"Iron and Steel","q":608.144,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.001,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.12,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":24.537,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":2804.12,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":1.733,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.512,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.001,"dv":2.26,"bm":1.4775},{"s":"Iron and Steel","q":0.415,"dv":2.26,"bm":1.4775},{"s":"Iron and Steel","q":0.043,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":2.189,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":50.675,"dv":3.12,"bm":1.25},{"s":"Iron and Steel","q":251.956,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":911.629,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":597.708,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":74.735,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":54.083,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":3.983,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":4371.096,"dv":3.12,"bm":1.25},{"s":"Iron and Steel","q":5841.683,"dv":3.11,"bm":1.17},{"s":"Iron and Steel","q":5325.973,"dv":3.12,"bm":1.25},{"s":"Iron and Steel","q":313.621,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":50.955,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.003,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":528.992,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.935,"dv":2.23,"bm":1.409},{"s":"Iron and Steel","q":35.017,"dv":2.23,"bm":1.409},{"s":"Iron and Steel","q":71.377,"dv":2.23,"bm":1.409},{"s":"Iron and Steel","q":90.693,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":10.66,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":45.916,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":26.532,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":426.324,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":242.56,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":87.536,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":33.015,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":25.968,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":2.715,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":218.373,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":5083.849,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":1175.52,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":23.585,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":59.043,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":239.749,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":133.471,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":775.22,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":78.66,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":644.168,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":98.861,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":14292.217,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":0.827,"dv":2.99,"bm":1.491},{"s":"Iron and Steel","q":30.08,"dv":2.99,"bm":1.491},{"s":"Iron and Steel","q":676.424,"dv":2.99,"bm":1.491},{"s":"Iron and Steel","q":62.837,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.067,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":3.155,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":40.293,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":1031.819,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.016,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":0.048,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":4.388,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":23.417,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":63.011,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":2075.937,"dv":3.09,"bm":1.135},{"s":"Iron and Steel","q":39784.017,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":2.011,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":1158.072,"dv":3.09,"bm":1.135},{"s":"Iron and Steel","q":7087.439,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":10150.971,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":147.739,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":85.052,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":8127.396,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":3017.431,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":155.667,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":4902.357,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":77.592,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":20695.427,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":33.584,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":2158.777,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":51501.649,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":4169.861,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":0.119,"dv":2.96,"bm":1.135},{"s":"Iron and Steel","q":33.625,"dv":2.96,"bm":1.135},{"s":"Iron and Steel","q":0.001,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":3.06,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":99.237,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":144.651,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":1121.396,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":30.839,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":3243.755,"dv":2.41,"bm":1.364},{"s":"Iron and Steel","q":1.375,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":13.576,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":49.685,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":0.067,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":0.0,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":54.937,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":966.921,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":41.384,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":389.908,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":36.612,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":2.743,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":325.42,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":616.317,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":7.739,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":7972.329,"dv":2.37,"bm":1.491},{"s":"Aluminium","q":0.001,"dv":0.36,"bm":0.091},{"s":"Aluminium","q":420.099,"dv":0.36,"bm":0.091},{"s":"Aluminium","q":0.095,"dv":0.36,"bm":0.091},{"s":"Aluminium","q":276.095,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":5271.756,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":282.28,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":3110.092,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":0.0,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":3025.719,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":32.391,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.0,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":31.152,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":468.999,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.007,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":64.024,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":83.752,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.011,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.097,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":53.229,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.001,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.0,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":21.769,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":125.483,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.011,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.616,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":0.001,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":380.743,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":357.241,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":96.889,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":75.095,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":729.676,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":5.232,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":2.601,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":8.304,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.093,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":11.887,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.005,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":126.843,"dv":1.8,"bm":0.14},{"s":"Aluminium","q":5174.249,"dv":2.48,"bm":0.148}],"kpi":{"KPI_VAL_B":"2.26","KPI_QTY_M":"2.64","KPI_TOP20_VAL_PCT":"74.7","KPI_TOP20_CBAM_PCT":"88.6","KPI_ACTIVE_CN8":"258","KPI_CBAM26_M":"319.9","KPI_PEN26_M":"58.0","KPI_PEN29_M":"174.2","KPI_USD_PCT":"30.8","KPI_FX26_M":"19.7","KPI_EUA26_USD":"91.68"}};
+const DATA = {"tot_val_26_b":2.26,"eua_2026_usd":91.68,"eua_2026_eur":79.5,"vn_pilot_usd":5.22,"eex_stats":{"p10_22_26":68.9,"med_22_26":85.3,"p90_22_26":97.0,"std_22_26":10.5,"latest_ym":"2026-11","latest_usd":98.52},"eex_series":[{"ym":"2021-01","eur":33.51,"fx":1.2171,"usd":40.78},{"ym":"2021-02","eur":37.66,"fx":1.2098,"usd":45.56},{"ym":"2021-03","eur":40.5,"fx":1.1899,"usd":48.19},{"ym":"2021-04","eur":44.96,"fx":1.1979,"usd":53.85},{"ym":"2021-05","eur":51.96,"fx":1.2146,"usd":63.11},{"ym":"2021-06","eur":52.7,"fx":1.2047,"usd":63.49},{"ym":"2021-07","eur":53.42,"fx":1.1822,"usd":63.15},{"ym":"2021-08","eur":56.29,"fx":1.1772,"usd":66.26},{"ym":"2021-09","eur":61.33,"fx":1.177,"usd":72.19},{"ym":"2021-10","eur":59.62,"fx":1.1601,"usd":69.17},{"ym":"2021-11","eur":65.54,"fx":1.1414,"usd":74.81},{"ym":"2021-12","eur":80.64,"fx":1.1304,"usd":91.15},{"ym":"2022-01","eur":83.3,"fx":1.1314,"usd":94.25},{"ym":"2022-02","eur":89.99,"fx":1.1342,"usd":102.06},{"ym":"2022-03","eur":74.61,"fx":1.1019,"usd":82.21},{"ym":"2022-04","eur":80.53,"fx":1.0819,"usd":87.12},{"ym":"2022-05","eur":85.29,"fx":1.0578,"usd":90.22},{"ym":"2022-06","eur":82.72,"fx":1.0566,"usd":87.4},{"ym":"2022-07","eur":81.58,"fx":1.0179,"usd":83.04},{"ym":"2022-08","eur":87.66,"fx":1.0128,"usd":88.79},{"ym":"2022-09","eur":69.57,"fx":0.9904,"usd":68.9},{"ym":"2022-10","eur":69.52,"fx":0.9826,"usd":68.31},{"ym":"2022-11","eur":75.55,"fx":1.0201,"usd":77.07},{"ym":"2022-12","eur":86.47,"fx":1.0589,"usd":91.57},{"ym":"2023-01","eur":80.07,"fx":1.0769,"usd":86.22},{"ym":"2023-02","eur":91.98,"fx":1.0715,"usd":98.56},{"ym":"2023-03","eur":89.46,"fx":1.0706,"usd":95.78},{"ym":"2023-04","eur":89.6,"fx":1.0968,"usd":98.27},{"ym":"2023-05","eur":83.83,"fx":1.0868,"usd":91.1},{"ym":"2023-06","eur":85.03,"fx":1.084,"usd":92.17},{"ym":"2023-07","eur":86.3,"fx":1.1058,"usd":95.43},{"ym":"2023-08","eur":84.78,"fx":1.0909,"usd":92.49},{"ym":"2023-09","eur":81.99,"fx":1.0684,"usd":87.6},{"ym":"2023-10","eur":80.71,"fx":1.0563,"usd":85.25},{"ym":"2023-11","eur":75.69,"fx":1.0808,"usd":81.81},{"ym":"2023-12","eur":68.74,"fx":1.0903,"usd":74.95},{"ym":"2024-01","eur":61.66,"fx":1.0905,"usd":67.24},{"ym":"2024-02","eur":55.35,"fx":1.0795,"usd":59.75},{"ym":"2024-03","eur":57.46,"fx":1.0872,"usd":62.47},{"ym":"2024-04","eur":63.83,"fx":1.0728,"usd":68.47},{"ym":"2024-05","eur":70.94,"fx":1.0812,"usd":76.71},{"ym":"2024-06","eur":68.6,"fx":1.0759,"usd":73.81},{"ym":"2024-07","eur":66.82,"fx":1.0844,"usd":72.46},{"ym":"2024-08","eur":70.07,"fx":1.1012,"usd":77.16},{"ym":"2024-09","eur":65.16,"fx":1.1106,"usd":72.37},{"ym":"2024-10","eur":63.1,"fx":1.0904,"usd":68.81},{"ym":"2024-11","eur":67.02,"fx":1.063,"usd":71.24},{"ym":"2024-12","eur":67.22,"fx":1.0479,"usd":70.44},{"ym":"2025-01","eur":75.9,"fx":1.0354,"usd":78.59},{"ym":"2025-02","eur":75.72,"fx":1.0413,"usd":78.84},{"ym":"2025-03","eur":68.76,"fx":1.0807,"usd":74.31},{"ym":"2025-04","eur":64.21,"fx":1.1214,"usd":72.01},{"ym":"2025-05","eur":70.52,"fx":1.1278,"usd":79.53},{"ym":"2025-06","eur":72.12,"fx":1.1516,"usd":83.06},{"ym":"2025-07","eur":69.99,"fx":1.1677,"usd":81.73},{"ym":"2025-08","eur":70.96,"fx":1.1631,"usd":82.54},{"ym":"2025-09","eur":75.46,"fx":1.1732,"usd":88.53},{"ym":"2025-10","eur":77.92,"fx":1.163,"usd":90.63},{"ym":"2025-11","eur":80.7,"fx":1.156,"usd":93.29},{"ym":"2025-12","eur":82.74,"fx":1.1709,"usd":96.88},{"ym":"2026-01","eur":86.51,"fx":1.1738,"usd":101.54},{"ym":"2026-02","eur":73.77,"fx":1.1824,"usd":87.23},{"ym":"2026-03","eur":68.17,"fx":1.1558,"usd":78.79},{"ym":"2026-04","eur":72.81,"fx":1.1706,"usd":85.24},{"ym":"2026-05","eur":74.95,"fx":1.1673,"usd":87.49},{"ym":"2026-06","eur":77.82,"fx":1.1518,"usd":89.63},{"ym":"2026-07","eur":80.26,"fx":1.1417,"usd":91.64},{"ym":"2026-08","eur":81.63,"fx":1.1593,"usd":94.63},{"ym":"2026-09","eur":84.62,"fx":1.1513,"usd":97.42},{"ym":"2026-10","eur":85.97,"fx":1.1202,"usd":96.3},{"ym":"2026-11","eur":87.95,"fx":1.1202,"usd":98.52}],"pareto_milestones":{"total_codes":258,"top5_cbam26":59.6,"top10_cbam26":74.5,"top20_val":74.7,"top20_cbam26":88.6,"top20_cbam29":89.4},"pareto_top20":[{"cn8":"72071210","name":"Phôi thép tấm (Slab)","hs4":"7207","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":83.39,"cbam29_m":132.74,"val26_m":396.96,"cum_val_pct":17.6,"cum26_pct":26.1,"cum29_pct":26.5},{"cn8":"72104900","name":"Thép mạ kẽm","hs4":"7210","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"cbam26_m":46.54,"cbam29_m":77.7,"val26_m":336.51,"cum_val_pct":32.5,"cum26_pct":40.6,"cum29_pct":42.0},{"cn8":"72083900","name":"HRC <3mm","hs4":"7208","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":35.31,"cbam29_m":56.34,"val26_m":192.29,"cum_val_pct":41.0,"cum26_pct":51.7,"cum29_pct":53.2},{"cn8":"25232900","name":"Xi măng Portland*","hs4":"2523","sector":"Xi măng","chain":"upstream","fallback":true,"cbam26_m":12.75,"cbam29_m":18.49,"val26_m":17.38,"cum_val_pct":41.7,"cum26_pct":55.6,"cum29_pct":56.9},{"cn8":"72106100","name":"Thép mạ nhôm-kẽm","hs4":"7210","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"cbam26_m":12.61,"cbam29_m":21.06,"val26_m":92.06,"cum_val_pct":45.8,"cum26_pct":59.6,"cum29_pct":61.1},{"cn8":"72107080","name":"Thép phủ sơn/nhựa","hs4":"7210","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"cbam26_m":11.02,"cbam29_m":18.4,"val26_m":93.75,"cum_val_pct":50.0,"cum26_pct":63.0,"cum29_pct":64.8},{"cn8":"72142000","name":"Thép thanh vằn","hs4":"7214","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":10.81,"cbam29_m":17.21,"val26_m":60.96,"cum_val_pct":52.7,"cum26_pct":66.4,"cum29_pct":68.2},{"cn8":"72083800","name":"HRC 3–4,75mm","hs4":"7208","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":10.37,"cbam29_m":16.54,"val26_m":56.34,"cum_val_pct":55.2,"cum26_pct":69.6,"cum29_pct":71.5},{"cn8":"73181588","name":"Vít & bu lông thép","hs4":"7318","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"cbam26_m":8.0,"cbam29_m":11.89,"val26_m":75.95,"cum_val_pct":58.5,"cum26_pct":72.1,"cum29_pct":73.9},{"cn8":"72249014","name":"Phôi thép hợp kim","hs4":"7224","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":7.59,"cbam29_m":10.78,"val26_m":21.43,"cum_val_pct":59.5,"cum26_pct":74.5,"cum29_pct":76.0},{"cn8":"72193310","name":"Inox CRC 1–3mm*","hs4":"7219","sector":"Sắt & Thép","chain":"inox_ch73","fallback":true,"cbam26_m":6.83,"cbam29_m":8.81,"val26_m":40.86,"cum_val_pct":61.3,"cum26_pct":76.7,"cum29_pct":77.8},{"cn8":"72193410","name":"Inox CRC 0,5–1mm*","hs4":"7219","sector":"Sắt & Thép","chain":"inox_ch73","fallback":true,"cbam26_m":6.79,"cbam29_m":8.77,"val26_m":43.89,"cum_val_pct":63.2,"cum26_pct":78.8,"cum29_pct":79.5},{"cn8":"72091690","name":"CRC 1–3mm","hs4":"7209","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"cbam26_m":5.21,"cbam29_m":8.57,"val26_m":33.63,"cum_val_pct":64.7,"cum26_pct":80.4,"cum29_pct":81.2},{"cn8":"72139110","name":"Thép dây cuộn","hs4":"7213","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":5.12,"cbam29_m":8.14,"val26_m":25.87,"cum_val_pct":65.8,"cum26_pct":82.0,"cum29_pct":82.9},{"cn8":"72091790","name":"CRC 0,5–1mm","hs4":"7209","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"cbam26_m":4.6,"cbam29_m":7.58,"val26_m":30.05,"cum_val_pct":67.2,"cum26_pct":83.4,"cum29_pct":84.4},{"cn8":"73181290","name":"Vít gỗ bằng thép","hs4":"7318","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"cbam26_m":4.58,"cbam29_m":7.29,"val26_m":92.86,"cum_val_pct":71.3,"cum26_pct":84.9,"cum29_pct":85.8},{"cn8":"73181568","name":"Vít lục giác chìm","hs4":"7318","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"cbam26_m":3.22,"cbam29_m":4.78,"val26_m":34.64,"cum_val_pct":72.8,"cum26_pct":85.9,"cum29_pct":86.8},{"cn8":"72251990","name":"Thép silic cán nguội","hs4":"7225","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"cbam26_m":2.99,"cbam29_m":4.23,"val26_m":11.2,"cum_val_pct":73.3,"cum26_pct":86.8,"cum29_pct":87.6},{"cn8":"72071912","name":"Phôi thanh thép <0,25% C","hs4":"7207","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":2.94,"cbam29_m":4.69,"val26_m":16.48,"cum_val_pct":74.0,"cum26_pct":87.7,"cum29_pct":88.6},{"cn8":"72139149","name":"Thép dây cuộn khác","hs4":"7213","sector":"Sắt & Thép","chain":"upstream","fallback":false,"cbam26_m":2.67,"cbam29_m":4.25,"val26_m":14.97,"cum_val_pct":74.7,"cum26_pct":88.6,"cum29_pct":89.4}],"quadrant_hs4":[{"hs4":"7210","label":"7210 Thép mạ/phủ","short":"7210","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"val_m":537.35,"unit_usd":792.0,"cbam26_m":71.76,"cbam29_m":119.8,"cbam34_m":191.7,"eff26":13.4,"eff29":22.3,"eff34":35.7},{"hs4":"7207","label":"7207 Phôi thép","short":"7207","sector":"Sắt & Thép","chain":"upstream","fallback":false,"val_m":418.22,"unit_usd":551.0,"cbam26_m":87.41,"cbam29_m":139.15,"cbam34_m":212.77,"eff26":20.9,"eff29":33.3,"eff34":50.9},{"hs4":"7318","label":"7318 Ốc vít & linh kiện thép","short":"7318","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"val_m":331.97,"unit_usd":2073.0,"cbam26_m":22.61,"cbam29_m":34.25,"cbam34_m":49.71,"eff26":6.8,"eff29":10.3,"eff34":15.0},{"hs4":"7208","label":"7208 Thép cuộn nóng (HRC)","short":"7208","sector":"Sắt & Thép","chain":"upstream","fallback":false,"val_m":271.49,"unit_usd":627.0,"cbam26_m":49.61,"cbam29_m":79.16,"cbam34_m":121.33,"eff26":18.3,"eff29":29.2,"eff34":44.7},{"hs4":"7219","label":"7219 Thép không gỉ cán phẳng","short":"7219","sector":"Sắt & Thép","chain":"inox_ch73","fallback":true,"val_m":115.26,"unit_usd":2436.0,"cbam26_m":18.67,"cbam29_m":24.11,"cbam34_m":28.31,"eff26":16.2,"eff29":20.9,"eff34":24.6},{"hs4":"7209","label":"7209 Thép cán nguội (CRC)","short":"7209","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"val_m":67.05,"unit_usd":707.0,"cbam26_m":10.31,"cbam29_m":16.96,"cbam34_m":26.79,"eff26":15.4,"eff29":25.3,"eff34":39.9},{"hs4":"7308","label":"7308 Kết cấu thép","short":"7308","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"val_m":65.63,"unit_usd":4130.0,"cbam26_m":2.43,"cbam29_m":3.69,"cbam34_m":5.38,"eff26":3.7,"eff29":5.6,"eff34":8.2},{"hs4":"7214","label":"7214 Thép thanh/que","short":"7214","sector":"Sắt & Thép","chain":"upstream","fallback":false,"val_m":60.96,"unit_usd":649.0,"cbam26_m":10.81,"cbam29_m":17.21,"cbam34_m":26.32,"eff26":17.7,"eff29":28.2,"eff34":43.2},{"hs4":"7326","label":"7326 Sản phẩm thép khác","short":"7326","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"val_m":49.79,"unit_usd":4781.0,"cbam26_m":1.1,"cbam29_m":1.83,"cbam34_m":2.93,"eff26":2.2,"eff29":3.7,"eff34":5.9},{"hs4":"7604","label":"7604 Nhôm thanh/định hình","short":"7604 Nhôm","sector":"Nhôm","chain":"outside","fallback":false,"val_m":48.23,"unit_usd":5394.0,"cbam26_m":1.72,"cbam29_m":2.08,"cbam34_m":2.17,"eff26":3.6,"eff29":4.3,"eff34":4.5},{"hs4":"7306","label":"7306 Ống thép hàn","short":"7306","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"val_m":45.67,"unit_usd":2485.0,"cbam26_m":3.49,"cbam29_m":4.93,"cbam34_m":6.58,"eff26":7.7,"eff29":10.8,"eff34":14.4},{"hs4":"7616","label":"7616 Sản phẩm nhôm chế biến","short":"7616 Nhôm","sector":"Nhôm","chain":"outside","fallback":false,"val_m":44.06,"unit_usd":8293.0,"cbam26_m":1.25,"cbam29_m":1.5,"cbam34_m":1.56,"eff26":2.8,"eff29":3.4,"eff34":3.5},{"hs4":"7213","label":"7213 Thép cuộn thanh/dây","short":"7213","sector":"Sắt & Thép","chain":"upstream","fallback":false,"val_m":40.84,"unit_usd":604.0,"cbam26_m":7.78,"cbam29_m":12.39,"cbam34_m":18.95,"eff26":19.1,"eff29":30.3,"eff34":46.4},{"hs4":"7307","label":"7307 Phụ kiện ống thép","short":"7307","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"val_m":25.6,"unit_usd":3187.0,"cbam26_m":0.95,"cbam29_m":1.5,"cbam34_m":2.27,"eff26":3.7,"eff29":5.8,"eff34":8.9},{"hs4":"7224","label":"7224 Phôi thép hợp kim","short":"7224","sector":"Sắt & Thép","chain":"upstream","fallback":false,"val_m":21.43,"unit_usd":614.0,"cbam26_m":7.59,"cbam29_m":10.78,"cbam34_m":14.48,"eff26":35.4,"eff29":50.3,"eff34":67.6},{"hs4":"2523","label":"2523 Xi măng Portland","short":"2523 Xi măng","sector":"Xi măng","chain":"upstream","fallback":true,"val_m":17.38,"unit_usd":117.0,"cbam26_m":12.75,"cbam29_m":18.49,"cbam34_m":25.53,"eff26":73.3,"eff29":106.4,"eff34":146.8},{"hs4":"7229","label":"7229 Dây thép hợp kim","short":"7229","sector":"Sắt & Thép","chain":"upstream","fallback":false,"val_m":16.84,"unit_usd":1351.0,"cbam26_m":2.7,"cbam29_m":3.84,"cbam34_m":5.2,"eff26":16.0,"eff29":22.8,"eff34":30.9},{"hs4":"7304","label":"7304 Ống thép đúc","short":"7304","sector":"Sắt & Thép","chain":"inox_ch73","fallback":false,"val_m":16.27,"unit_usd":4731.0,"cbam26_m":0.71,"cbam29_m":0.97,"cbam34_m":1.26,"eff26":4.3,"eff29":6.0,"eff34":7.7},{"hs4":"7605","label":"7605 Dây nhôm","short":"7605","sector":"Nhôm","chain":"outside","fallback":false,"val_m":14.11,"unit_usd":4663.0,"cbam26_m":0.58,"cbam29_m":0.7,"cbam34_m":0.73,"eff26":4.1,"eff29":4.9,"eff34":5.2},{"hs4":"7225","label":"7225 Thép hợp kim cán phẳng","short":"7225","sector":"Sắt & Thép","chain":"hrc_down","fallback":false,"val_m":11.61,"unit_usd":823.0,"cbam26_m":3.1,"cbam29_m":4.39,"cbam34_m":5.89,"eff26":26.7,"eff29":37.8,"eff34":50.7}],"quad_max_cbam34":212.77,"fx_decomp":{"certs26_m":3.4894,"certs29_m":5.469,"yearly":[{"year":2021,"eur_mean":53.18,"fx_mean":1.1835,"usd_mean":62.64,"eur_yoy_pct":117.2,"fx_yoy_pct":3.7,"usd_yoy_pct":123.3,"bill26_m":218.6,"bill29_m":342.6},{"year":2022,"eur_mean":80.56,"fx_mean":1.0539,"usd_mean":85.08,"eur_yoy_pct":51.5,"fx_yoy_pct":-11.0,"usd_yoy_pct":35.8,"bill26_m":296.9,"bill29_m":465.3},{"year":2023,"eur_mean":83.18,"fx_mean":1.0816,"usd_mean":89.97,"eur_yoy_pct":3.2,"fx_yoy_pct":2.6,"usd_yoy_pct":5.7,"bill26_m":313.9,"bill29_m":492.0},{"year":2024,"eur_mean":64.77,"fx_mean":1.0821,"usd_mean":70.08,"eur_yoy_pct":-22.1,"fx_yoy_pct":0.0,"usd_yoy_pct":-22.1,"bill26_m":244.5,"bill29_m":383.2},{"year":2025,"eur_mean":73.75,"fx_mean":1.1293,"usd_mean":83.33,"eur_yoy_pct":13.9,"fx_yoy_pct":4.4,"usd_yoy_pct":18.9,"bill26_m":290.8,"bill29_m":455.7},{"year":2026,"eur_mean":79.5,"fx_mean":1.154,"usd_mean":91.68,"eur_yoy_pct":7.8,"fx_yoy_pct":2.2,"usd_yoy_pct":10.0,"bill26_m":319.9,"bill29_m":501.4}],"quarterly":[{"q_key":"2021-Q1","q_num":"Q1","year":2021,"q_full":"Q1/2021","eur_mean":37.22,"fx_mean":1.2056,"usd_mean":44.85,"eur_qoq_pct":37.4,"fx_qoq_pct":1.1,"usd_qoq_pct":38.7},{"q_key":"2021-Q2","q_num":"Q2","year":2021,"q_full":"Q2/2021","eur_mean":49.87,"fx_mean":1.2057,"usd_mean":60.15,"eur_qoq_pct":34.0,"fx_qoq_pct":0.0,"usd_qoq_pct":34.1},{"q_key":"2021-Q3","q_num":"Q3","year":2021,"q_full":"Q3/2021","eur_mean":57.01,"fx_mean":1.1788,"usd_mean":67.2,"eur_qoq_pct":14.3,"fx_qoq_pct":-2.2,"usd_qoq_pct":11.7},{"q_key":"2021-Q4","q_num":"Q4","year":2021,"q_full":"Q4/2021","eur_mean":68.6,"fx_mean":1.144,"usd_mean":78.38,"eur_qoq_pct":20.3,"fx_qoq_pct":-3.0,"usd_qoq_pct":16.6},{"q_key":"2022-Q1","q_num":"Q1","year":2022,"q_full":"Q1/2022","eur_mean":82.63,"fx_mean":1.1225,"usd_mean":92.84,"eur_qoq_pct":20.5,"fx_qoq_pct":-1.9,"usd_qoq_pct":18.5},{"q_key":"2022-Q2","q_num":"Q2","year":2022,"q_full":"Q2/2022","eur_mean":82.84,"fx_mean":1.0654,"usd_mean":88.25,"eur_qoq_pct":0.3,"fx_qoq_pct":-5.1,"usd_qoq_pct":-4.9},{"q_key":"2022-Q3","q_num":"Q3","year":2022,"q_full":"Q3/2022","eur_mean":79.6,"fx_mean":1.007,"usd_mean":80.24,"eur_qoq_pct":-3.9,"fx_qoq_pct":-5.5,"usd_qoq_pct":-9.1},{"q_key":"2022-Q4","q_num":"Q4","year":2022,"q_full":"Q4/2022","eur_mean":77.18,"fx_mean":1.0205,"usd_mean":78.98,"eur_qoq_pct":-3.0,"fx_qoq_pct":1.3,"usd_qoq_pct":-1.6},{"q_key":"2023-Q1","q_num":"Q1","year":2023,"q_full":"Q1/2023","eur_mean":87.17,"fx_mean":1.073,"usd_mean":93.52,"eur_qoq_pct":12.9,"fx_qoq_pct":5.1,"usd_qoq_pct":18.4},{"q_key":"2023-Q2","q_num":"Q2","year":2023,"q_full":"Q2/2023","eur_mean":86.15,"fx_mean":1.0892,"usd_mean":93.85,"eur_qoq_pct":-1.2,"fx_qoq_pct":1.5,"usd_qoq_pct":0.3},{"q_key":"2023-Q3","q_num":"Q3","year":2023,"q_full":"Q3/2023","eur_mean":84.36,"fx_mean":1.0884,"usd_mean":91.84,"eur_qoq_pct":-2.1,"fx_qoq_pct":-0.1,"usd_qoq_pct":-2.1},{"q_key":"2023-Q4","q_num":"Q4","year":2023,"q_full":"Q4/2023","eur_mean":75.05,"fx_mean":1.0758,"usd_mean":80.67,"eur_qoq_pct":-11.0,"fx_qoq_pct":-1.2,"usd_qoq_pct":-12.2},{"q_key":"2024-Q1","q_num":"Q1","year":2024,"q_full":"Q1/2024","eur_mean":58.16,"fx_mean":1.0857,"usd_mean":63.15,"eur_qoq_pct":-22.5,"fx_qoq_pct":0.9,"usd_qoq_pct":-21.7},{"q_key":"2024-Q2","q_num":"Q2","year":2024,"q_full":"Q2/2024","eur_mean":67.79,"fx_mean":1.0766,"usd_mean":73.0,"eur_qoq_pct":16.6,"fx_qoq_pct":-0.8,"usd_qoq_pct":15.6},{"q_key":"2024-Q3","q_num":"Q3","year":2024,"q_full":"Q3/2024","eur_mean":67.35,"fx_mean":1.0987,"usd_mean":73.99,"eur_qoq_pct":-0.7,"fx_qoq_pct":2.1,"usd_qoq_pct":1.4},{"q_key":"2024-Q4","q_num":"Q4","year":2024,"q_full":"Q4/2024","eur_mean":65.78,"fx_mean":1.0671,"usd_mean":70.16,"eur_qoq_pct":-2.3,"fx_qoq_pct":-2.9,"usd_qoq_pct":-5.2},{"q_key":"2025-Q1","q_num":"Q1","year":2025,"q_full":"Q1/2025","eur_mean":73.46,"fx_mean":1.0524,"usd_mean":77.25,"eur_qoq_pct":11.7,"fx_qoq_pct":-1.4,"usd_qoq_pct":10.1},{"q_key":"2025-Q2","q_num":"Q2","year":2025,"q_full":"Q2/2025","eur_mean":68.95,"fx_mean":1.1336,"usd_mean":78.2,"eur_qoq_pct":-6.1,"fx_qoq_pct":7.7,"usd_qoq_pct":1.2},{"q_key":"2025-Q3","q_num":"Q3","year":2025,"q_full":"Q3/2025","eur_mean":72.14,"fx_mean":1.168,"usd_mean":84.27,"eur_qoq_pct":4.6,"fx_qoq_pct":3.0,"usd_qoq_pct":7.8},{"q_key":"2025-Q4","q_num":"Q4","year":2025,"q_full":"Q4/2025","eur_mean":80.46,"fx_mean":1.1633,"usd_mean":93.6,"eur_qoq_pct":11.5,"fx_qoq_pct":-0.4,"usd_qoq_pct":11.1},{"q_key":"2026-Q1","q_num":"Q1","year":2026,"q_full":"Q1/2026","eur_mean":76.15,"fx_mean":1.1707,"usd_mean":89.19,"eur_qoq_pct":-5.4,"fx_qoq_pct":0.6,"usd_qoq_pct":-4.7},{"q_key":"2026-Q2","q_num":"Q2","year":2026,"q_full":"Q2/2026","eur_mean":75.19,"fx_mean":1.1633,"usd_mean":87.45,"eur_qoq_pct":-1.3,"fx_qoq_pct":-0.6,"usd_qoq_pct":-1.9},{"q_key":"2026-Q3","q_num":"Q3","year":2026,"q_full":"Q3/2026","eur_mean":82.17,"fx_mean":1.1508,"usd_mean":94.56,"eur_qoq_pct":9.3,"fx_qoq_pct":-1.1,"usd_qoq_pct":8.1}],"bridge_24_26":{"eur24":64.77,"eur26":79.5,"fx24":1.0821,"fx26":1.154,"usd24":70.08,"usd26":91.68,"usd_pct":30.8,"eur_pct":22.7,"fx_pct":6.7,"b26_start":244.5,"b26_eur_only":300.2,"b26_end":319.9,"b26_eua_add":55.7,"b26_fx_add":19.7,"b26_tot_add":75.4,"eua_share_pct":73.9,"fx_share_pct":26.1,"b29_start":383.2,"b29_end":501.4,"b29_eua_add":87.2,"b29_fx_add":30.9,"b29_tot_add":118.2,"corr_24_26":0.49,"fx_min_val":0.9826,"fx_min_ym":"2022-10"}},"cn8_sim":[{"s":"Cement","q":0.013,"dv":1.39,"bm":0.666},{"s":"Cement","q":0.004,"dv":1.45,"bm":0.859},{"s":"Cement","q":148751.155,"dv":1.44,"bm":0.666},{"s":"Cement","q":0.144,"dv":1.43,"bm":0.666},{"s":"Fertilisers","q":266.667,"dv":1.31,"bm":0.503},{"s":"Fertilisers","q":201.6,"dv":2.38,"bm":0.882},{"s":"Fertilisers","q":140.0,"dv":1.27,"bm":0.434},{"s":"Fertilisers","q":0.04,"dv":0.88,"bm":0.319},{"s":"Fertilisers","q":160.004,"dv":0.88,"bm":0.339},{"s":"Fertilisers","q":325.333,"dv":0.85,"bm":0.248},{"s":"Iron and Steel","q":1584.003,"dv":1.69,"bm":1.319},{"s":"Iron and Steel","q":746.667,"dv":5.59,"bm":1.319},{"s":"Iron and Steel","q":112.035,"dv":2.87,"bm":1.124},{"s":"Iron and Steel","q":0.013,"dv":2.33,"bm":1.288},{"s":"Iron and Steel","q":0.0,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":724715.121,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":25581.061,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":9380.156,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":0.001,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":240.573,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":304.28,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":3362.547,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":8528.499,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":21914.753,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":90507.807,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":308294.16,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":5.652,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":0.099,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":32.28,"dv":2.35,"bm":1.37},{"s":"Iron and Steel","q":47916.393,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":42350.433,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":4087.893,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":466.24,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":5.888,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":873.015,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":440176.977,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":5651.432,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":119289.159,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":8437.005,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":104242.544,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":7.827,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":1734.927,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":60.708,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.005,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":68.053,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":87.637,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":44452.339,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":23198.017,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":93956.941,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":1.628,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":36.091,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":0.1,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":239.207,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":31.359,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":32.256,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":80.767,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":15.5,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":3937.216,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":5.769,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":0.739,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":0.005,"dv":5.006,"bm":1.4},{"s":"Iron and Steel","q":0.013,"dv":5.006,"bm":1.4},{"s":"Iron and Steel","q":0.009,"dv":4.94,"bm":1.17},{"s":"Iron and Steel","q":6692.555,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":103.044,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":17299.875,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":1031.439,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":17208.167,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":1873.099,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":3012.276,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":89.596,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":4.32,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":7.228,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":0.048,"dv":4.94,"bm":1.17},{"s":"Iron and Steel","q":672.916,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":0.795,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":209.761,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":11.195,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":0.064,"dv":5.02,"bm":1.25},{"s":"Iron and Steel","q":173.259,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":0.016,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":38.793,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":0.071,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":3.748,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":0.06,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":249.909,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":35.253,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":62.497,"dv":4.82,"bm":1.206},{"s":"Iron and Steel","q":34909.355,"dv":3.48,"bm":1.493},{"s":"Iron and Steel","q":13578.567,"dv":3.5,"bm":1.488},{"s":"Iron and Steel","q":483.387,"dv":3.5,"bm":1.586},{"s":"Iron and Steel","q":10.285,"dv":3.5,"bm":1.619},{"s":"Iron and Steel","q":37.383,"dv":3.5,"bm":1.619},{"s":"Iron and Steel","q":4.783,"dv":3.5,"bm":1.586},{"s":"Iron and Steel","q":0.033,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":8.207,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.001,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.177,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.029,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.016,"dv":3.44,"bm":1.7235},{"s":"Iron and Steel","q":0.0,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":3.764,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.119,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.015,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.003,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":7512.811,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":4949.743,"dv":3.5,"bm":1.5295},{"s":"Iron and Steel","q":0.033,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":0.036,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":0.377,"dv":2.77,"bm":1.383},{"s":"Iron and Steel","q":27.7,"dv":2.77,"bm":1.383},{"s":"Iron and Steel","q":48.977,"dv":2.77,"bm":1.383},{"s":"Iron and Steel","q":1.999,"dv":2.23,"bm":1.484},{"s":"Iron and Steel","q":0.001,"dv":2.23,"bm":1.484},{"s":"Iron and Steel","q":608.144,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.001,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.12,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":24.537,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":2804.12,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":1.733,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.512,"dv":3.07,"bm":1.154},{"s":"Iron and Steel","q":0.001,"dv":2.26,"bm":1.4775},{"s":"Iron and Steel","q":0.415,"dv":2.26,"bm":1.4775},{"s":"Iron and Steel","q":0.043,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":2.189,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":50.675,"dv":3.12,"bm":1.25},{"s":"Iron and Steel","q":251.956,"dv":2.37,"bm":1.458},{"s":"Iron and Steel","q":911.629,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":597.708,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":74.735,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":54.083,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":3.983,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":4371.096,"dv":3.12,"bm":1.25},{"s":"Iron and Steel","q":5841.683,"dv":3.11,"bm":1.17},{"s":"Iron and Steel","q":5325.973,"dv":3.12,"bm":1.25},{"s":"Iron and Steel","q":313.621,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":50.955,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.003,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":528.992,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.935,"dv":2.23,"bm":1.409},{"s":"Iron and Steel","q":35.017,"dv":2.23,"bm":1.409},{"s":"Iron and Steel","q":71.377,"dv":2.23,"bm":1.409},{"s":"Iron and Steel","q":90.693,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":10.66,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":45.916,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":26.532,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":426.324,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":242.56,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":87.536,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":33.015,"dv":2.74,"bm":1.154},{"s":"Iron and Steel","q":25.968,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":2.715,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":218.373,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":5083.849,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":1175.52,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":23.585,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":59.043,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":239.749,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":133.471,"dv":2.33,"bm":1.383},{"s":"Iron and Steel","q":775.22,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":78.66,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":644.168,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":98.861,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":14292.217,"dv":2.84,"bm":1.491},{"s":"Iron and Steel","q":0.827,"dv":2.99,"bm":1.491},{"s":"Iron and Steel","q":30.08,"dv":2.99,"bm":1.491},{"s":"Iron and Steel","q":676.424,"dv":2.99,"bm":1.491},{"s":"Iron and Steel","q":62.837,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.067,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":3.155,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":40.293,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":1031.819,"dv":2.37,"bm":1.491},{"s":"Iron and Steel","q":0.016,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":0.048,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":4.388,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":23.417,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":63.011,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":2075.937,"dv":3.09,"bm":1.135},{"s":"Iron and Steel","q":39784.017,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":2.011,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":1158.072,"dv":3.09,"bm":1.135},{"s":"Iron and Steel","q":7087.439,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":10150.971,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":147.739,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":85.052,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":8127.396,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":3017.431,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":155.667,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":4902.357,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":77.592,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":20695.427,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":33.584,"dv":2.75,"bm":1.135},{"s":"Iron and Steel","q":2158.777,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":51501.649,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":4169.861,"dv":2.75,"bm":1.364},{"s":"Iron and Steel","q":0.119,"dv":2.96,"bm":1.135},{"s":"Iron and Steel","q":33.625,"dv":2.96,"bm":1.135},{"s":"Iron and Steel","q":0.001,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":3.06,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":99.237,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":144.651,"dv":2.96,"bm":1.364},{"s":"Iron and Steel","q":1121.396,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":30.839,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":3243.755,"dv":2.41,"bm":1.364},{"s":"Iron and Steel","q":1.375,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":13.576,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":49.685,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":0.067,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":0.0,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":54.937,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":966.921,"dv":2.35,"bm":1.397},{"s":"Iron and Steel","q":41.384,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":389.908,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":36.612,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":2.743,"dv":2.35,"bm":1.364},{"s":"Iron and Steel","q":325.42,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":616.317,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":7.739,"dv":2.33,"bm":1.629},{"s":"Iron and Steel","q":7972.329,"dv":2.37,"bm":1.491},{"s":"Aluminium","q":0.001,"dv":0.36,"bm":0.091},{"s":"Aluminium","q":420.099,"dv":0.36,"bm":0.091},{"s":"Aluminium","q":0.095,"dv":0.36,"bm":0.091},{"s":"Aluminium","q":276.095,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":5271.756,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":282.28,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":3110.092,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":0.0,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":3025.719,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":32.391,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.0,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":31.152,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":468.999,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.007,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":64.024,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":83.752,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.011,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.097,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":53.229,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.001,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.0,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":21.769,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":125.483,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.011,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.616,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":0.001,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":380.743,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":357.241,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":96.889,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":75.095,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":729.676,"dv":2.04,"bm":0.152},{"s":"Aluminium","q":5.232,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":2.601,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":8.304,"dv":2.48,"bm":0.258},{"s":"Aluminium","q":0.093,"dv":2.02,"bm":0.148},{"s":"Aluminium","q":11.887,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":0.005,"dv":2.48,"bm":0.148},{"s":"Aluminium","q":126.843,"dv":1.8,"bm":0.14},{"s":"Aluminium","q":5174.249,"dv":2.48,"bm":0.148}],"kpi":{"KPI_VAL_B":"2,26","KPI_QTY_M":"2,64","KPI_TOP20_VAL_PCT":"74,7","KPI_TOP20_CBAM_PCT":"88,6","KPI_ACTIVE_CN8":"258","KPI_CBAM26_M":"319,9","KPI_PEN26_M":"58,0","KPI_PEN29_M":"174,2","KPI_DOWN_PCT":"42,6","KPI_USD_PCT":"30,8","KPI_FX26_M":"19,7","KPI_EUA26_USD":"91,68"}};
 const PHASE_YEARS = [2026, 2027, 2028, 2029, 2030, 2034];
 const PHASE_FACTORS = { 2026: 0.025, 2027: 0.05, 2028: 0.10, 2029: 0.225, 2030: 0.485, 2034: 1.0 };
-const fmtNum = (n, d = 1) => Number(n).toFixed(d);
+const fmtVi = (n, d = 1) => Number(n).toFixed(d).replace('.', ',');
 
 Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 Chart.defaults.color = '#4a607a';
@@ -329,8 +316,8 @@ const trajTotalLabelPlugin = {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
     topMeta.data.forEach((bar, i) => {
-      const tot = fmtNum(ds0[i] + ds1[i], 1);
-      ctx.fillText('$' + tot + 'M', bar.x, bar.y - 6);
+      const tot = fmtVi(ds0[i] + ds1[i], 1);
+      ctx.fillText('$' + tot + ' tr', bar.x, bar.y - 6);
     });
     ctx.restore();
   }
@@ -344,10 +331,10 @@ function renderTrajectory() {
   chartTrajectory = new Chart(document.getElementById('chartTrajectory'), {
     type: 'bar',
     data: {
-      labels: PHASE_YEARS.map(y => y + ' (' + fmtNum(PHASE_FACTORS[y] * 100, 1) + '%)'),
+      labels: PHASE_YEARS.map(y => y + ' (' + fmtVi(PHASE_FACTORS[y] * 100, 1) + '%)'),
       datasets: [
         {
-          label: 'Baseline CBAM cost (without markup)',
+          label: 'Chi phí nền (chưa cộng phụ phí)',
           data: baseArr,
           backgroundColor: '#1e3a5f',
           hoverBackgroundColor: '#132742',
@@ -360,7 +347,7 @@ function renderTrajectory() {
           maxBarThickness: 64
         },
         {
-          label: 'Default markup surcharge (+10% → +30%)',
+          label: 'Phụ phí giá trị mặc định (+10% → +30%)',
           data: penArr,
           backgroundColor: '#d4ba99',
           hoverBackgroundColor: '#c2a47e',
@@ -385,8 +372,8 @@ function renderTrajectory() {
           beginAtZero: true,
           suggestedMax: 850,
           grid: { color: 'rgba(15, 37, 68, 0.09)' },
-          ticks: { callback: v => '$' + v + 'M' },
-          title: { display: true, text: 'Million USD / year', font: { size: 11 } }
+          ticks: { callback: v => '$' + v },
+          title: { display: true, text: 'Triệu USD / năm', font: { size: 11 } }
         }
       }
     }
@@ -394,7 +381,7 @@ function renderTrajectory() {
 }
 renderTrajectory();
 
-// ======================== 2A. TOP 20 CN8 CODES BY CBAM LIABILITY + PARETO ========================
+// ======================== Top 20 Mã CN8 có Chi phí CBAM cao nhất + Pareto ========================
 let chartPareto = null;
 function renderPareto(mode) {
   const is2029 = (mode === '2029');
@@ -404,7 +391,7 @@ function renderPareto(mode) {
   const cumPctData = arr.map(d => is2029 ? d.cum29_pct : d.cum26_pct);
 
   document.getElementById('paretoTitle').textContent =
-    'Top 20 CN8 Codes by CBAM Liability & Pareto Curve (' + (is2029 ? '2029' : '2026') + ')';
+    'Top 20 mã CN8 có chi phí CBAM cao nhất và đường Pareto (' + (is2029 ? '2029' : '2026') + ')';
 
   if (chartPareto) chartPareto.destroy();
   chartPareto = new Chart(document.getElementById('chartPareto'), {
@@ -414,7 +401,7 @@ function renderPareto(mode) {
       datasets: [
         {
           type: 'line',
-          label: 'Cumulative CBAM Share — Pareto (%)',
+          label: 'Tỷ trọng tích lũy CBAM — Pareto (%)',
           data: cumPctData,
           yAxisID: 'y1',
           borderColor: '#0f2544',
@@ -430,7 +417,7 @@ function renderPareto(mode) {
         },
         {
           type: 'bar',
-          label: is2029 ? 'Projected CBAM Liability 2029 ($M)' : 'Projected CBAM Liability 2026 ($M)',
+          label: is2029 ? 'Chi phí CBAM 2029 (triệu USD)' : 'Chi phí CBAM 2026 (triệu USD)',
           data: cbamData,
           yAxisID: 'y',
           backgroundColor: '#8c1d35',
@@ -464,9 +451,9 @@ function renderPareto(mode) {
               const cum = is2029 ? d.cum29_pct : d.cum26_pct;
               const pct = d.val26_m > 0 ? (cbam / d.val26_m * 100) : 0;
               return [
-                `• Annualized 9M 2026 export turnover: $${fmtNum(d.val26_m, 2)}M`,
-                `• CBAM liability / export ratio: ${fmtNum(pct, 1)}%`,
-                `• Cumulative Pareto share (Top ${idx + 1}/${DATA.pareto_milestones.total_codes} codes): ${fmtNum(cum, 1)}%`
+                `• Kim ngạch XK 9M 2026 quy năm: $${fmtVi(d.val26_m, 2)} triệu`,
+                `• Tỷ lệ chi phí CBAM / kim ngạch: ${fmtVi(pct, 1)}%`,
+                `• Tích lũy Pareto (Top ${idx + 1}/${DATA.pareto_milestones.total_codes} mã): ${fmtVi(cum, 1)}%`
               ];
             }
           }
@@ -488,8 +475,8 @@ function renderPareto(mode) {
           position: 'left',
           beginAtZero: true,
           grid: { color: 'rgba(15, 37, 68, 0.09)' },
-          ticks: { callback: v => '$' + v + 'M' },
-          title: { display: true, text: 'CBAM Liability (Million USD / year)', font: { size: 11 } }
+          ticks: { callback: v => '$' + v },
+          title: { display: true, text: 'Chi phí CBAM (triệu USD / năm)', font: { size: 11 } }
         },
         y1: {
           position: 'right',
@@ -497,7 +484,7 @@ function renderPareto(mode) {
           max: 100,
           grid: { drawOnChartArea: false },
           ticks: { callback: v => v + '%', font: { size: 10.5 } },
-          title: { display: true, text: 'Cumulative CBAM Share (%)', font: { size: 11 } }
+          title: { display: true, text: 'Tỷ trọng tích lũy CBAM (%)', font: { size: 11 } }
         }
       }
     }
@@ -505,7 +492,7 @@ function renderPareto(mode) {
 }
 renderPareto('2026');
 
-// ======================== 2B. QUADRANT SCATTER (EFFECTIVE CBAM RATE) ========================
+// ======================== 2B. QUADRANT SCATTER (TỶ LỆ CHI PHÍ CBAM) ========================
 let chartQuadrant = null;
 const bubbleLabelPlugin = {
   id: 'bubbleLabels',
@@ -561,9 +548,9 @@ function renderQuadrant(yrKey) {
   const maxRef = DATA.quad_max_cbam34 || 212.83;
 
   const groups = {
-    red: { label: 'Effective rate ≥ 30% of export value', color: 'rgba(140, 29, 53, 0.84)', border: '#5e1021', pts: [] },
-    amber: { label: 'Effective rate 10%–30% of export value', color: 'rgba(212, 186, 153, 0.88)', border: '#967752', pts: [] },
-    teal: { label: 'Effective rate < 10% of export value', color: 'rgba(30, 58, 95, 0.82)', border: '#0f2544', pts: [] }
+    red: { label: 'Tỷ lệ ≥ 30% kim ngạch', color: 'rgba(140, 29, 53, 0.84)', border: '#5e1021', pts: [] },
+    amber: { label: 'Tỷ lệ 10%–30% kim ngạch', color: 'rgba(212, 186, 153, 0.88)', border: '#967752', pts: [] },
+    teal: { label: 'Tỷ lệ < 10% kim ngạch', color: 'rgba(30, 58, 95, 0.82)', border: '#0f2544', pts: [] }
   };
 
   for (const d of DATA.quadrant_hs4) {
@@ -607,7 +594,7 @@ function renderQuadrant(yrKey) {
           callbacks: {
             label: (ctx) => {
               const p = ctx.raw;
-              return `${p.label}: Export turnover $${fmtNum(p.x, 1)}M | CBAM ${yrFull}: ${fmtNum(p.y, 1)}% ($${fmtNum(p.cbam, 1)}M) | Avg unit value ~$${Math.round(p.unit)}/t${p.fb ? ' [EU default benchmark]' : ''}`;
+              return `${p.label}: Kim ngạch $${fmtVi(p.x, 1)} triệu | CBAM ${yrFull}: ${fmtVi(p.y, 1)}% ($${fmtVi(p.cbam, 1)} triệu) | Đơn giá ~$${Math.round(p.unit)}/tấn${p.fb ? ' [Hệ số mặc định chung]' : ''}`;
             }
           }
         }
@@ -617,13 +604,13 @@ function renderQuadrant(yrKey) {
           type: 'logarithmic',
           min: 8,
           max: 1000,
-          title: { display: true, text: 'Annualized 9M 2026 Export Turnover to EU (Million USD, log scale)', font: { size: 11 } },
-          ticks: { callback: v => [10, 25, 50, 100, 250, 500, 1000].includes(v) ? '$' + v + 'M' : '' }
+          title: { display: true, text: 'Kim ngạch xuất khẩu sang EU 9M 2026 quy năm (triệu USD, thang log)', font: { size: 11 } },
+          ticks: { callback: v => [10, 25, 50, 100, 250, 500, 1000].includes(v) ? '$' + v : '' }
         },
         y: {
           beginAtZero: true,
           max: yMax,
-          title: { display: true, text: `Projected CBAM Rate in ${yrFull} (% of export turnover)`, font: { size: 11 } }
+          title: { display: true, text: `Tỷ lệ chi phí CBAM năm ${yrFull} (% kim ngạch)`, font: { size: 11 } }
         }
       }
     }
@@ -645,7 +632,7 @@ new Chart(document.getElementById('chartEuaFxDual'), {
     labels: DATA.eex_series.map(d => d.ym),
     datasets: [
       {
-        label: 'EUA Price (€/t)',
+        label: 'Giá EUA (EUR/tấn)',
         data: DATA.eex_series.map(d => d.eur),
         borderColor: '#1e3a5f',
         backgroundColor: 'rgba(30, 58, 95, 0.11)',
@@ -656,7 +643,7 @@ new Chart(document.getElementById('chartEuaFxDual'), {
         yAxisID: 'y'
       },
       {
-        label: 'EUR/USD Exchange Rate (ECB)',
+        label: 'Tỷ giá EUR/USD (ECB)',
         data: DATA.eex_series.map(d => d.fx),
         borderColor: '#b5946d',
         backgroundColor: '#b5946d',
@@ -675,8 +662,8 @@ new Chart(document.getElementById('chartEuaFxDual'), {
     plugins: { legend: { position: 'bottom', labels: { boxWidth: 11, font: { size: 11 } } } },
     scales: {
       x: { ticks: { maxTicksLimit: 8, font: { size: 10.5 } }, grid: { display: false } },
-      y: { beginAtZero: true, position: 'left', grid: { color: 'rgba(15, 37, 68, 0.09)' }, title: { display: true, text: 'EUA Price (€/t)', font: { size: 11 } } },
-      y1: { min: 0.95, max: 1.25, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'EUR/USD Exchange Rate', font: { size: 11 } } }
+      y: { beginAtZero: true, position: 'left', grid: { color: 'rgba(15, 37, 68, 0.09)' }, title: { display: true, text: 'Giá EUA (EUR/tấn)', font: { size: 11 } } },
+      y1: { min: 0.95, max: 1.25, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Tỷ giá EUR/USD', font: { size: 11 } } }
     }
   }
 });
@@ -726,7 +713,7 @@ const fxTotalLabelPlugin = {
       if (!pt || !b1 || !b2) return;
 
       const val = d.usd_qoq_pct;
-      const txt = (val > 0 ? '+' : '') + fmtNum(val, 1) + '%';
+      const txt = (val > 0 ? '+' : '') + fmtVi(val, 1) + '%';
       const padX = 4;
       const boxH = 15;
       const boxW = ctx.measureText(txt).width + padX * 2;
@@ -759,7 +746,7 @@ new Chart(document.getElementById('chartFxDecomp'), {
     datasets: [
       {
         type: 'line',
-        label: 'Total Cost Change (USD equiv.)',
+        label: 'Tổng biến động chi phí (quy USD)',
         data: fxQ.map(d => d.usd_qoq_pct),
         borderColor: 'rgba(140, 29, 53, 0.72)',
         backgroundColor: '#8c1d35',
@@ -776,7 +763,7 @@ new Chart(document.getElementById('chartFxDecomp'), {
       },
       {
         type: 'bar',
-        label: 'Contribution from EUA Price (EUR)',
+        label: 'Đóng góp từ giá EUA (EUR)',
         data: fxQ.map(d => d.eur_qoq_pct),
         backgroundColor: '#1e3a5f',
         hoverBackgroundColor: '#132742',
@@ -786,7 +773,7 @@ new Chart(document.getElementById('chartFxDecomp'), {
       },
       {
         type: 'bar',
-        label: 'Contribution from EUR/USD FX',
+        label: 'Đóng góp từ tỷ giá (EUR/USD)',
         data: fxQ.map(d => d.fx_qoq_pct),
         backgroundColor: '#d4ba99',
         hoverBackgroundColor: '#c2a47e',
@@ -825,7 +812,7 @@ new Chart(document.getElementById('chartFxDecomp'), {
           afterBody: (items) => {
             const idx = items[0].dataIndex;
             const d = fxQ[idx];
-            return `${d.q_full} Avg: €${fmtNum(d.eur_mean, 2)}/t | FX ${fmtNum(d.fx_mean, 4)} | $${fmtNum(d.usd_mean, 2)}/t`;
+            return `Bình quân ${d.q_full}: €${fmtVi(d.eur_mean, 2)}/tấn | Tỷ giá ${fmtVi(d.fx_mean, 4)} | $${fmtVi(d.usd_mean, 2)}/tấn`;
           }
         }
       }
@@ -845,7 +832,7 @@ new Chart(document.getElementById('chartFxDecomp'), {
           lineWidth: (ctx) => (ctx.tick && ctx.tick.value === 0 ? 1.8 : 1)
         },
         ticks: { callback: v => v + '%' },
-        title: { display: true, text: 'Quarter-on-Quarter Change (%)', font: { size: 11 } }
+        title: { display: true, text: 'Biến động so với quý trước (%)', font: { size: 11 } }
       }
     }
   }
