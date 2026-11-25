@@ -1,92 +1,112 @@
-# DỰ ÁN NGHIÊN CỨU & MÔ HÌNH HÓA TÁC ĐỘNG CBAM ĐỐI VỚI HÀNG XUẤT KHẨU VIỆT NAM (2019–2026 & DỰ PHÓNG 2026–2034)
+# EU CBAM Impact Modeling & Decision Support for Vietnam Exports (2019–2034)
 
-> **Báo cáo Chuyên sâu, Hệ thống Dữ liệu Kiểm toán 100% Phạm vi Việt Nam & Bảng Điều khiển Phân tích Tương tác (Interactive Dashboard)**
+> **End-to-End Quantitative Trade & Carbon Liability Analysis, 100% Vietnam Scope Audit, and Interactive Decision-Support Dashboard**
 
----
-
-## 📌 HƯỚNG DẪN DÀNH CHO BAN GIÁM KHẢO & NGƯỜI CHẤM BÀI
-
-Để xem và đánh giá nhanh toàn bộ dự án, vui lòng theo thứ tự ưu tiên sau:
-
-1. **Xem Báo cáo Nghiên cứu Khoa học Toàn diện (Word Report):**
-   * Mở file **[`docs/CBAM_Report_EN.docx`](file:///docs/CBAM_Report_EN.docx)** với đầy đủ cấu trúc học thuật quốc tế: Executive Summary, Methodology, 4 Chương phân tích định lượng, Scenario Simulation và Policy Recommendations.
-2. **Xem Bảng Điều khiển Tương tác (Interactive Dashboard):**
-   * Mở trực tiếp file **[`dashboard/index.html`](file:///dashboard/index.html)** bằng bất kỳ trình duyệt web nào (Chrome, Edge, Firefox, Safari).
-   * Không cần cài đặt web server hay môi trường phức tạp (tất cả biểu đồ Chart.js và dữ liệu đã được nhúng sẵn độc lập).
-3. **Xem Từ điển Dữ liệu & Bảng Thuyết trình (Presentation Excel):**
-   * Mở file **[`CBAM_Dataset_Data_Dictionary_Presentation.xlsx`](file:///CBAM_Dataset_Data_Dictionary_Presentation.xlsx)** gồm 5 sheets chuyên nghiệp (Tổng quan 12 datasets, từ điển 30+ thuộc tính, Top 20 Siêu Pareto, tổng hợp 4 ngành, kiểm toán chất lượng).
-4. **Xem Kiểm toán Dữ liệu & Phương pháp:**
-   * Mở file **[`02_cbam_live_verification_and_methodology_audit.ipynb`](file:///02_cbam_live_verification_and_methodology_audit.ipynb)** để xem toàn bộ 15 kiểm toán độc lập về tính toàn vẹn dữ liệu, công thức mark-up và các phát hiện phản trực giác.
-5. **Xem Pipeline Tiền xử lý Dữ liệu:**
-   * Mở file **[`01_cbam_preprocessing_pipeline.ipynb`](file:///01_cbam_preprocessing_pipeline.ipynb)** để xem quy trình ETL chuyển đổi từ dữ liệu thô sang 275 mã CN8.
-6. **Xem Báo cáo Chính sách & Danh mục Dữ liệu:**
-   * **[`docs/CBAM_CARBON_POLICY_OUTLINE.md`](file:///docs/CBAM_CARBON_POLICY_OUTLINE.md)**: Khung phân tích chính sách và đề xuất giải pháp sàn carbon HNX.
-   * **[`docs/DATA_CATALOG_AND_QUALITY_REPORT.md`](file:///docs/DATA_CATALOG_AND_QUALITY_REPORT.md)**: Báo cáo chất lượng và chứng chỉ nguồn gốc dữ liệu.
-   * **[`prompt.md`](file:///prompt.md)**: Chuỗi 12 prompt phân rã mô đun tái lập dự án cho AI.
+[![Report](https://img.shields.io/badge/Report-English%20(Word)-blue)](docs/CBAM_Report_EN.docx)
+[![Dashboard](https://img.shields.io/badge/Dashboard-Interactive%20HTML-brightgreen)](dashboard/index.html)
+[![Notebooks](https://img.shields.io/badge/Notebooks-ETL%20%26%2015%20Audits-orange)](02_cbam_live_verification_and_methodology_audit.ipynb)
+[![Data](https://img.shields.io/badge/Coverage-275%20CN8%20Codes-lightgrey)](data/processed/cbam_vn_exposure_master_by_cn8.csv)
 
 ---
 
-## 📁 CẤU TRÚC THƯ MỤC DỰ ÁN
+## 📌 Project Overview
+
+The European Union's **Carbon Border Adjustment Mechanism (CBAM)** introduces carbon-price parity on carbon-intensive imports entering the EU market, shifting from its transitional phase to definitive financial enforcement (2026–2034).
+
+This project builds a reproducible data pipeline, methodology audit suite, and interactive decision-support dashboard to quantify Vietnam's export exposure across **275 CN8 product codes (54 HS4 groups, 4 CBAM-covered sectors)** using official trade, carbon-price, and emissions benchmark datasets (**Eurostat**, **EEX EUA**, **ECB**, and **European Commission**).
+
+---
+
+## 🔍 Key Quantitative Findings
+
+1. **Super-Pareto Risk Concentration:**
+   * Just **20 out of 275 CN8 codes** (7.3% of product lines) account for **89.5% of Vietnam's total CBAM liability in 2026**, rising to **90.1% in 2029**.
+   * Exposure is led by coated flat-rolled steel `72104900` (\$71.7M) and semi-finished steel `72071210` (\$68.9M).
+
+2. **Default-Value Mark-Up Penalty Escalation (2028–2029):**
+   * Failing to report verified actual emissions (MRV) triggers EU default-value mark-up penalties that jump from **+10% (2026)** to **+30% (from 2028 onward)**.
+   * Additional penalty costs surge from **\$69.0M (2026)** to **\$207.0M/year (2029)** — representing **34.9%** of the total CBAM bill.
+
+3. **Counter-Intuitive Margin Stress-Test Results:**
+   * **Cement (`25232900`):** Despite modest export value (\$12.6M), effective CBAM burden reaches **112.5% of export price by 2029**, creating severe negative-margin risk without MRV decarbonization.
+   * **Aluminum (`7616`, `7604`, `7601`):** Despite large export volume, effective CBAM burden remains low (**1.4% – 4.7% of export price**) due to high unit prices (\$2,673–\$7,545/ton) and exclusion of indirect electricity emissions under current rules.
+
+4. **Value-Chain Trap & Downstream Steel Paradox:**
+   * Downstream steel (`7209`, `7210`, `7219`, `73xx`) accounts for **63.7% of total CBAM liability (\$240.5M)** while relying heavily on imported HRC/billets.
+   * Because embedded emissions from imported precursors cannot be offset through Vietnam's domestic carbon exchange (HNX), exporters require end-to-end supply-chain traceability and upstream localization.
+
+---
+
+## 🚀 Quick Start & Reviewer Guide
+
+Explore the project deliverables in recommended order:
+
+1. **Comprehensive Academic & Policy Report (English):**
+   * Open [`docs/CBAM_Report_EN.docx`](docs/CBAM_Report_EN.docx) for the Executive Summary, Methodology, Quantitative Analysis, 2026–2034 Scenario Simulations, and Policy Recommendations.
+2. **Interactive Web Dashboard:**
+   * Open [`dashboard/index.html`](dashboard/index.html) directly in any modern browser (Chrome, Edge, Firefox, Safari) — no web server or backend setup required (all datasets and Chart.js visualizations are self-contained; Vietnamese UI).
+3. **Data Dictionary & Presentation Workbook (Excel):**
+   * Open [`CBAM_Dataset_Data_Dictionary_Presentation.xlsx`](CBAM_Dataset_Data_Dictionary_Presentation.xlsx) containing 5 structured sheets (12-dataset catalog, 30+ attribute dictionary, Top 20 Super-Pareto breakdown, 4-sector summary, and quality audit).
+4. **Methodology & Live Data Verification Notebook:**
+   * Review [`02_cbam_live_verification_and_methodology_audit.ipynb`](02_cbam_live_verification_and_methodology_audit.ipynb) for 15 independent checks covering data integrity, mark-up penalty formulas, and counter-intuitive findings.
+5. **ETL & Preprocessing Pipeline Notebook:**
+   * Review [`01_cbam_preprocessing_pipeline.ipynb`](01_cbam_preprocessing_pipeline.ipynb) for the end-to-end transformation from raw Eurostat/EEX/EU Commission sources into the 275-CN8 master dataset.
+6. **Policy Notes, Data Catalog & AI Reproduction Prompts:**
+   * [`docs/CBAM_CARBON_POLICY_OUTLINE.md`](docs/CBAM_CARBON_POLICY_OUTLINE.md) — Policy framework & domestic HNX carbon market strategy.
+   * [`docs/DATA_CATALOG_AND_QUALITY_REPORT.md`](docs/DATA_CATALOG_AND_QUALITY_REPORT.md) — Source catalog, download links & quality verification.
+   * [`prompt.md`](prompt.md) — 12-step modular prompt sequence for reproducing the project with AI agents.
+
+---
+
+## 🛠️ Tech Stack & Methodology
+
+* **Data Engineering & Analytics:** Python, Pandas, Jupyter Notebooks (`01_cbam_preprocessing_pipeline.ipynb`, `02_cbam_live_verification_and_methodology_audit.ipynb`)
+* **Data Sources:** Eurostat EU-27 imports (monthly & annual CN8), EEX EUA carbon futures (2020–2026), ECB FX rates, EU Commission CBAM Default Values & Benchmarks
+* **Scenario & Shock Modeling:** 9M 2026 Price–Volume decomposition (`cbam_vn_yoy_2026_shock.csv`), 2026–2034 phase-in & mark-up simulation
+* **Visualization & Reporting:** Self-contained HTML/CSS/JavaScript + Chart.js dashboard, Excel Data Dictionary, Academic Word Report
+
+---
+
+## 📁 Repository Structure
 
 ```text
-Hackathong_2/
-├── README.md                                             # ⭐️ Tài liệu tổng quan & hướng dẫn xem bài (file này)
-├── 01_cbam_preprocessing_pipeline.ipynb                  # Notebook tiền xử lý dữ liệu từ Eurostat, EEX, EU Commission
-├── 02_cbam_live_verification_and_methodology_audit.ipynb # Notebook kiểm toán phương pháp & đối chứng trực tiếp
-├── CBAM_Dataset_Data_Dictionary_Presentation.xlsx         # Bảng tra cứu thuộc tính & dữ liệu thuyết trình 5 tabs
-├── prompt.md                                             # Chuỗi 12 prompt phân rã mô đun tái lập dự án cho AI
+.
+├── README.md                                             # Project overview & reviewer guide
+├── 01_cbam_preprocessing_pipeline.ipynb                  # ETL pipeline: Eurostat, EEX, EU Commission -> 275 CN8
+├── 02_cbam_live_verification_and_methodology_audit.ipynb # 15 independent methodology & integrity audits
+├── CBAM_Dataset_Data_Dictionary_Presentation.xlsx         # 5-tab data dictionary & presentation workbook
+├── prompt.md                                             # 12 modular prompts to reproduce the project
 │
-├── dashboard/                                            # Hệ thống Dashboard Web tương tác
-│   ├── index.html                                        # Dashboard chính thức (Tiếng Việt đầy đủ)
-│   ├── index_vi.html                                     # Bản dự phòng tương đương của dashboard tiếng Việt
-│   └── cbam_dashboards_updated.html                      # Trích đoạn độc lập 3 dashboard đã hiệu chỉnh giao diện
+├── dashboard/                                            # Self-contained interactive web dashboards
+│   ├── index.html                                        # Primary interactive dashboard (Chart.js)
+│   ├── index_vi.html                                     # Backup copy of interactive dashboard
+│   └── cbam_dashboards_updated.html                      # Standalone 3-dashboard UI extract
 │
-├── data/                                                 # Toàn bộ dữ liệu nghiên cứu chuẩn hóa
-│   ├── processed/                                        # Dữ liệu sạch phục vụ phân tích & trực quan hóa
-│   │   ├── cbam_vn_exposure_master_by_cn8.csv            # Master 275 mã CN8 của VN xuất khẩu sang EU (nền 2025)
-│   │   ├── cbam_vn_exposure_master_by_hs4.csv            # Dữ liệu tổng hợp theo 54 nhóm HS4
-│   │   ├── cbam_vn_exposure_summary_by_sector.csv        # Dữ liệu 4 ngành hàng trọng điểm
-│   │   ├── cbam_vn_yoy_2026_shock.csv                    # Dữ liệu phân rã Giá - Lượng 9M 2026
-│   │   ├── eex_eua_prices_monthly_2020_2026.csv          # Chuỗi giá thị trường ETS hàng tháng (EEX)
-│   │   └── eurostat_eu27_imports_vn_cbam_cn8_*.csv       # Chuỗi thương mại tháng & năm (Eurostat)
-│   └── raw/                                              # Dữ liệu gốc đối chiếu (EU Default Values, Benchmarks...)
+├── data/                                                 # Standardized research datasets
+│   ├── processed/                                        # Clean analytical & dashboard-ready datasets
+│   │   ├── cbam_vn_exposure_master_by_cn8.csv            # Master 275 CN8 Vietnam-to-EU exports (2025 base)
+│   │   ├── cbam_vn_exposure_master_by_hs4.csv            # Aggregated 54 HS4 product groups
+│   │   ├── cbam_vn_exposure_summary_by_sector.csv        # 4 CBAM-covered sector summary
+│   │   ├── cbam_vn_yoy_2026_shock.csv                    # 9M 2026 Price–Volume shock decomposition
+│   │   ├── eex_eua_prices_monthly_2020_2026.csv          # Monthly EEX EUA carbon price series
+│   │   └── eurostat_eu27_imports_vn_cbam_cn8_*.csv       # Monthly & annual Eurostat trade series
+│   └── raw/                                              # Raw reference tables (EU Default Values, Benchmarks)
 │
-├── docs/                                                 # Tài liệu phân tích & báo cáo kỹ thuật
-│   ├── CBAM_Report_EN.docx                               # 📑 Comprehensive Academic & Policy Report (Word format)
-│   ├── CBAM_CARBON_POLICY_OUTLINE.md                     # Khung chính sách & chiến lược bảo vệ doanh nghiệp VN
-│   ├── DATA_CATALOG_AND_QUALITY_REPORT.md                # Danh mục dữ liệu, link tải trực tiếp & báo cáo chất lượng
-│   ├── CBAM_Dataset_Data_Dictionary_Presentation.xlsx    # Bản lưu từ điển thuộc tính thuyết trình
-│   ├── prompt.md                                         # Framework chuỗi prompt tái lập dự án cho AI Agent
-│   └── paste_tutorial.md                                 # Hướng dẫn tích hợp cho AI Agent / Lập trình viên
+├── docs/                                                 # Reports & technical documentation
+│   ├── CBAM_Report_EN.docx                               # Comprehensive Academic & Policy Report (English)
+│   ├── CBAM_CARBON_POLICY_OUTLINE.md                     # Policy framework & HNX carbon market strategy
+│   ├── DATA_CATALOG_AND_QUALITY_REPORT.md                # Data catalog, direct links & quality report
+│   ├── CBAM_Dataset_Data_Dictionary_Presentation.xlsx    # Copy of presentation data dictionary
+│   ├── prompt.md                                         # AI reproduction prompt framework
+│   └── paste_tutorial.md                                 # Integration guide for developers / AI agents
 │
-├── scripts/                                              # Bộ mã nguồn tái lập dữ liệu và sinh dashboard
-│   ├── fetch_cbam_datasets.py                            # Tải tự động dữ liệu từ API Eurostat, ECB, EEX
-│   ├── build_master_and_audit.py                         # Hợp nhất dữ liệu master và chạy kiểm toán
-│   ├── build_dashboard.py                                # Script sinh dashboard v1
-│   ├── build_dashboard_v2.py                             # Script sinh dashboard v2
-│   ├── build_notebook.py                                 # Script tạo notebook 01
-│   └── generate_live_test_notebook.py                    # Script tạo notebook 02
+├── scripts/                                              # Reproducible Python automation scripts
+│   ├── fetch_cbam_datasets.py                            # Automated API ingestion (Eurostat, ECB, EEX)
+│   ├── build_master_and_audit.py                         # Master dataset builder & audit runner
+│   ├── build_dashboard.py                                # Dashboard generator v1
+│   ├── build_dashboard_v2.py                             # Dashboard generator v2
+│   ├── build_notebook.py                                 # Notebook 01 generator
+│   └── generate_live_test_notebook.py                    # Notebook 02 generator
 │
-└── _archive/                                             # Nơi lưu trữ file nén ban đầu và bản sao lưu an toàn
+└── _archive/                                             # Initial archive & safe backups
 ```
-
----
-
-## 🔍 TÓM TẮT PHÁT HIỆN NGHIÊN CỨU & KẾT QUẢ ĐỘT PHÁ
-
-1. **Hiệu ứng Siêu Pareto (Super-Pareto Concentration):**
-   * Chỉ **20 / 275 mã CN8** (chiếm 7.3% số mã) kiểm soát tới **89.5% tổng nghĩa vụ CBAM** của Việt Nam năm 2026 (và đạt **90.1%** năm 2029).
-   * Dẫn đầu là mã Tôn mạ `72104900` ($71.7M) và Phôi thép `72071210` ($68.9M).
-
-2. **Điểm bùng nổ Phạt Mark-up (2028–2029):**
-   * Việc không khai báo phát thải thực tế (MRV) mà dùng hệ số mặc định của EU sẽ kích hoạt quy tắc phạt mark-up từ **+10% (2026)** vọt lên **+30% (từ 2028)**.
-   * Chi phí phạt bổ sung tăng từ **$69.0M** (2026) lên tới **$207.0M/năm** (2029) — chiếm **34.9%** tổng hóa đơn CBAM.
-
-3. **Phát hiện Phản trực giác về Sức chịu tải Biên lợi nhuận:**
-   * **Xi măng (`25232900`):** Kim ngạch xuất khẩu nhỏ ($12.6M) nhưng chịu thuế suất CBAM lên tới **112.5% giá bán** vào năm 2029 (rơi vào vùng tử địa, lỗ nặng nếu không có MRV).
-   * **Nhôm (`7616`, `7604`, `7601`):** Dù kim ngạch lớn nhưng chỉ chịu thuế **1.4% – 4.7% giá bán** do đơn giá cao ($2,673–$7,545/tấn) và chưa bị tính phát thải điện gián tiếp.
-
-4. **Bẫy Chuỗi Giá trị & Nghịch lý Thép Hạ nguồn:**
-   * Thép hạ nguồn (`7209`, `7210`, `7219`, `73xx`) chiếm tới **63.7% nghĩa vụ CBAM** ($240.5M), nhưng lại sử dụng nguồn HRC/phôi nhập khẩu.
-   * Do đó, lượng phát thải từ nguyên liệu nhập khẩu không thể khấu trừ qua sàn carbon HNX nội địa, đòi hỏi chiến lược truy xuất nguồn gốc và nội địa hóa chuỗi cung ứng.
-
